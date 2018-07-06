@@ -2,13 +2,13 @@
 
 // Flight Structs ...
 
-typedef flight * TFlight;
+typedef struct flight * TFlight;
 
 typedef struct flight {
 
-    char date [ 11 ];
+    char date [ 11 ]; // Formato DD/MM/YYYY
 
-    char time [ 6 ];
+    char time [ 6 ]; // Formato HH:MM
 
     int type; // ( 1 = Internacional / 0 = N/A / -1 = Cabotaje )
 
@@ -18,11 +18,7 @@ typedef struct flight {
 
     int dst_oaci; // No puede estar en blanco y puede contener codigos que no sean aeropuertos conocidos
 
-    char * belongs_to; // Nombre de la aerolinea
-
-    char * model; // Modelo del avion
-
-    char APC; // Letra mayuscula
+    char * airline; // Nombre de la aerolinea
 
     struct flight *  next; // Siguiente vuelo
 
@@ -30,9 +26,9 @@ typedef struct flight {
 
 // Airport Structs ...
 
-typedef airportCDT * airportADT;
+typedef struct airportCDT * airportADT; //STRUCT SE DEFINE EN EL .C DEL TAD
 
-typedef struct airportCDT {
+typedef struct airport {
 
     char local_code [ 4 ]; // No puede estar vacio
 
@@ -52,7 +48,7 @@ typedef struct airportCDT {
 
     struct airportCDT * next; // Siguiente aeropuerto
 
-} airportCDT;
+} tAirport;
 
 // Functions ...
 
