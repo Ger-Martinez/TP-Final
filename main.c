@@ -22,7 +22,7 @@ main(int argc, const char *argv[])
 	}
 
 	FILE * aeropuertos, * movimientos;
-	if( (aeropuertos=fopen("aeropuertos_detalle.csv", "r")) || (movimientos("eana1401-1802.csv", "r")))
+	if( (aeropuertos=fopen("aeropuertos_detalle.csv", "r")) || (movimientos=fopen("eana1401-1802.csv", "r")))
 	{
 		printf("Error: No se pudo abrir un archivo\n");
 		return 3;
