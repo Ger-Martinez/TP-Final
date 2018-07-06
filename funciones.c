@@ -1,3 +1,66 @@
+#include "funciones.h"
+
+#define BLOQUE 5
+#define MAX_LINE 100
+
+char * readField(char * line, char delimit, int *pos)
+{
+	char * resp=NULL;
+	int dim=0;
+	while(line[*pos]!=delim || line[*pos])
+	{
+		if(dim%BLOQUE==0)
+			resp=realloc(resp, dim+BLOQUE);
+		resp[dim]=line[*pos];
+		dim++;
+		(*pos)++;
+	}
+	return resp;
+}
+
+tAirport readAirport(FILE * airports)
+{
+	char line[MAX_LINE];
+	char * aux;
+	if(fgets(line, MAX_LINE, airports));
+	{
+		tAirport resp=malloc(sizeof(*resp));
+		int pos=0;
+
+		aux=readField(line, ';', &pos);
+		strncpy(resp->local_code, aux, 3);
+		free(aux);
+		
+		aux=readField(line, ';', &pos);
+		strncpy(resp->OACI, aux, 4);
+		free(aux);
+		
+		aux=readField(line, ';', &pos);
+		strncpy(resp->IATA, aux, 3);
+		free(aux);
+		
+		aux=readField(line, ';', &pos);
+		resp->type=(strcmp(aux,"Aerodromo"))?1:((strcmp(aux, "Helipuerto"))?2:0);
+		free(aux);
+		
+		aux=readField(line, ';', &pos);
+		resp->name=malloc(strlen(aux)+1);
+		strcpy(resp->name, aux);
+		free(aux);
+		
+		aux=readField(line, ';', &pos);
+		resp->condition=(strcmp(aux,"PUBLICO"))?1:((strcmp(aux, "PRIVADO"))?2:0);;
+		free(aux);
+		
+		aux=readField(line, ';', &pos);
+		resp->traffic=(strcmp(aux,"Nacional"))?1:((strcmp(aux, "Internacional"))?2:0);
+		free(aux);
+		
+		return resp;
+	}
+	return NULL;
+}
+
 int cmpYear(char * date1, char * date2)
 {
 	return strcmp(date1+6, date2+6); /*+6 para saltear DD/MM/ */
@@ -10,7 +73,7 @@ int dateToDayOfWeek(char * date)
 	int monthDay[12] = {0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4}; 
 	if(m<3)
 		y--;
-	return (y+y/4 -y/100 +y/400 +monthDay[m-1]+d)%7; 
+	return (y+y/4 -y/100 +y/400 +monthDay[m-1]+d)%7;
 }
 /* si m=1 o m=2 entonces y=y-1 sino y=y, asi los "años" se tomaran desde 
 ** marzo y los dias extras de los años bisiestos se consideran al final
@@ -41,21 +104,3 @@ int dateToDayOfWeek(char * date)
 ** (2018+504-20+5+0+1)%7=2508%7=2 como se quiere que el 0 se domingo,
 ** entonces, se le "suma 0", para que este resultado sea coherente
 */
-
-void doQueries(FILE * aeropuertos, FILE * movimientos, short year)
-{
-	FILE * movsAero=fopen("movs_aeropuerto.csv", "w");
-	cantMovs(movsAero, aeropuertos, movimientos, year);
-	FILE * movsInter=fopen("movs_internacional.csv", "w");
-	cantInter(movsInter, aeropuertos, movimientos, year);
-	FILE * semanal=fopen("semanal.csv", "w");
-	porDiaDeSemana(semanal, aeropuertos, movimientos, year);
-	FILE * movsPorAero=fopen("aerop_detalle.csv", "w");
-	movsPorAerop(movsPorAero, aeropuertos, movimientos, year);
-	FILE * movsInter5=fopen("movs_internacion5.csv", "w");
-	porcentajeInter(movs_internacion5, aeropuertos, movimientos, year);
-	FILE * aerolinea=fopen("aerolinea.csv", "w");
-	movsAerolineas(aerolinea, aeropuertos, movimientos, year);
-	FILE * AterrYDespeg=fopen("movimientos.csv", "w")
-	movimientosTotales(AterrYDespeg, aeropuertos, movimientos, year);
-}
