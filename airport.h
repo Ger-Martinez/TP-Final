@@ -40,13 +40,13 @@ typedef struct airportCDT {
 
     char IATA [ 4 ]; // Puede estar en blanco
 
-    int type; // ( 1 = Aerodromo / 0 = Helipuerto )
+    int type; // ( 1 = Aerodromo / 2 = Helipuerto / 0 = En Blanco )
 
     char * name; // debe ser <= 70 y acepta enies y acentos
 
-    int condition; // ( 1 = Privado / 0 = Publico )
+    int condition; // ( 1 = Publico / 2 = Privado / 0 = En Blanco )
 
-    int traffic; // ( 1 = Internacional / 0 = Nacional )
+    int traffic; // ( 1 = Nacional / 2 = Internacional / 0 = En Blanco )
 
     TFlight flights; // Vuelos hacia o desde este aeropuerto
 
