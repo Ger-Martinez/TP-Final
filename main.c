@@ -3,7 +3,7 @@
 #include <string.h>
 
 #define MIN_YEAR 2014
-#define CANT_YEARS 4
+#define MAX_YEAR 2018
 
 
 // Testing
@@ -17,9 +17,9 @@ main(int argc, const char *argv[])
 	}
 	short year;
 	year=atoi(argv[1]);
-	if(year<MIN_YEAR || year>MIN_YEAR+CANT_YEARS-1)
+	if(year<MIN_YEAR || year>MAX_YEAR)
 	{
-		printf("Error: Ingresar un año que esté entre %d y %d\n", MIN_YEAR, MIN_YEAR+CANT_YEARS-1);
+		printf("Error: Ingresar un año que esté entre %d y %d\n", MIN_YEAR, MAX_YEAR);
 		return 2;
 	}
 

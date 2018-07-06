@@ -1,0 +1,84 @@
+Datos totales necesarios:
+Aeropuertos:
+local, OACI, IATA, tipo: es avion?, denominación.
+
+Vuelo: Fecha, Hora Movimiento, Clase de vuelo, clasificación Vuelo,
+Tipo de Movimiento, Origen OACI, Destino OACI, Aerolinea Nombre,
+
+                        Query 1
+Movimientos por aeropuerto, ordenado alfabéticamente por el
+código OACI del aeropuerto
+  Considerar: No debe contener aeropuertos con cero movimientos en el
+año pedido. Sólo se deben considerar los que figuren en el archivo de
+aeropuertos
+
+Archivo: "movs_aeropuerto.csv"
+Formato: El código OACI, el código local, la descripción y la cantidad de
+movimientos del aeropuerto
+
+
+                        Query 2
+Movimientos internacionales por aeropuerto, ordenado alfabéticamente
+por el código OACI
+  Considerar: No debe contener aeropuertos con cero movimientos
+internacionales en el año pedido. Sólo se deben considerar los que figuren
+en el archivo de aeropuertos.
+
+Archivo: "movs_internacional.csv"
+Formato: El código OACI, el código IATA, la cantidad de despegues, la
+cantidad de aterrizajes y la suma de ambas
+
+
+
+                        Query 3
+Vuelos por día de semana, ordenado cronológicamente por el día
+de la semana.
+  Considerar: todos los vuelos, tanto de aviones como helicópetros,
+nacionales o internacionales, etc.
+
+Archivo: "semanal.csv"
+Formato: Día de la semana, cantidad de vuelos
+
+
+
+                        Query 4
+Movimientos por aeropuerto, ordenado alfabéticamente por el
+código OACI de los aeropuertos
+  Considerar: El archivo tiene que estar ordenado alfabéticamente primero por
+código OACI local y luego por el código OACI del otro aeropuerto.
+
+Archivo: "aerop_detalle.csv" ( 1 archivo por aeropuerto)
+Formato: Código OACI del aeropuerto local, código OACI del otro aeropuerto,
+cantidad de despegues hacia ese aeropuerto y cantidad de vuelos
+provenientes de ese aeropuerto.
+
+
+
+                        Query 5
+Movimientos internacionales por aeropuerto, ordenado por cantidad
+de movimientos, en forma descendente
+  Considerar: No debe contener aeropuertos con cero movimientos
+internacionales en el año pedido.
+
+Archivo: "movs_internacional_cant.csv"
+Formato: El código iata, la cantidad de despegues, la cantidad de aterrizajes,
+la suma de ambas, y el porcentaje (75.33) de vuelos respecto del total,
+
+
+
+                        Query 6
+Vuelos por Aerolínea, ordenado por cantidad de vuelos, en forma
+descendente
+  Considerar: Al final tiene que contener una entrada de nombre
+“Otros” para todos los vuelos que no tengan indicada una aerolínea.
+
+Archivo: "aerolinea.csv"
+Formato: Aerolinea, cantidad de vueltos
+
+
+
+                        Query 7
+Vuelos por tipo de movimiento y clasificación
+
+Archivo:  "movimientos.csv"
+Formato: Tipo de movimiento, clasificación, cantidad de vuelos.
