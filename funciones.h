@@ -1,3 +1,14 @@
+#ifndef _FUNCIONES_C_
+#define _FUNCIONES_C_
+
+/* Lee los campos de una linea del csv, los campos vacios hacen que devuelva el string vacío
+** el puntero pos indica desde que posición del string se empieza a leer
+*/
+char * readField(char * line, char delimit, int *pos);
+
+/* Almacena una linea del csv en una estructura de aeropuerto */
+tAirport readAirport(FILE * airports);
+
 /* Compara 2 strings en formato DD/MM/YYYY y retorna positivo si el año del primero
 ** es mayor que el segundo, negativo si el año del segundo es mayor que el primero
 ** y 0 (cero) si los años son iguales
@@ -9,3 +20,4 @@ int cmpYear(char * date1, char * date2);
 int dateToDayOfWeek(char * date);
 /* Realiza los queries pedidos*/
 void doQueries(FILE * aeropuertos, FILE * movimientos, short year);
+#endif

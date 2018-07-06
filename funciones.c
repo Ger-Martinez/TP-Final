@@ -7,7 +7,7 @@ char * readField(char * line, char delimit, int *pos)
 {
 	char * resp=NULL;
 	int dim=0;
-	while(line[*pos]!=delim || line[*pos])
+	while(line[*pos]!=delimit || line[*pos])
 	{
 		if(dim%BLOQUE==0)
 			resp=realloc(resp, dim+BLOQUE);
@@ -15,6 +15,10 @@ char * readField(char * line, char delimit, int *pos)
 		dim++;
 		(*pos)++;
 	}
+	if(line[*pos]==delimit)
+		(*pos)++; /*para que en la proxima invocacion se saltee*/
+	resp=realloc(resp, dim+1);
+	resp[dim]=0;
 	return resp;
 }
 
@@ -40,7 +44,7 @@ tAirport readAirport(FILE * airports)
 		free(aux);
 
 		aux=readField(line, ';', &pos);
-		resp->type=(strcmp(aux,"Aerodromo"))?1:((strcmp(aux, "Helipuerto"))?2:0);
+		resp->type=(strcmp(aux,"Aeródromo"))?1:((strcmp(aux, "Helipuerto"))?2:0);
 		free(aux);
 
 		aux=readField(line, ';', &pos);
