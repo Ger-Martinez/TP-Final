@@ -17,6 +17,8 @@ char * readField(char * line, char delimit, int *pos)
 	}
 	if(line[*pos]==delimit)
 		(*pos)++; /*para que en la proxima invocacion se saltee*/
+	resp=realloc(resp, dim+1);
+	resp[dim]=0;
 	return resp;
 }
 
