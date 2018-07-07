@@ -19,7 +19,7 @@ typedef struct flight {
 
 // Airport Structs ...
 
-typedef struct airportCDT * airportADT; //STRUCT SE DEFINE EN EL .C DEL TAD
+typedef struct airportCDT * airportADT;
 
 struct airport {
 
