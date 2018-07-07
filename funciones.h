@@ -6,7 +6,7 @@
 */
 char * readField(char * line, char delimit, int *pos);
 
-/* Almacena una linea del csv en una estructura de aeropuerto */
+/* Almacena una linea del csv en una estructura de aeropuerto, retorna NULL si no hay mas lineas que leer */
 tAirport readAirport(FILE * airports);
 
 /* Compara 2 strings en formato DD/MM/YYYY y retorna positivo si el año del primero
