@@ -4,22 +4,24 @@
 
 typedef struct flight * TFlight;
 
-typedef struct flight {
+struct flight {
 
     char date [ 11 ];       // Formato DD/MM/YYYY
     char time [ 6 ];        // Formato HH:MM
     int type;               // ( 1 = Internacional / 0 = N/A / -1 = Cabotaje )
-    int mv;                 // ( 1 = Aterrizaje / 0 = Despegue )
-    int or_oaci;            // No puede estar en blanco
-    int dst_oaci;           // No puede estar en blanco y puede contener codigos que no sean aeropuertos conocidos
+    int mv;                 // ( 1 = Aterrizaje / 0 = N/A / -1 = Despegue )
+    char or_oaci[ 5 ];      // No puede estar en blanco
+    char dst_oaci[ 5 ];     // No puede estar en blanco y puede contener codigos que no sean aeropuertos conocidos
     char * airline;         // Nombre de la aerolinea
     struct flight *  next;  // Siguiente vuelo
 
-} flight;
+};
 
 // Airport Structs ...
 
 typedef struct airportCDT * airportADT;
+
+typedef struct airport * tAirport;
 
 struct airport {
 
@@ -34,8 +36,6 @@ struct airport {
     struct airport * next;  // Siguiente aeropuerto
 
 }
-
-typedef struct airport * tAirport;
 
 // Functions ...
 

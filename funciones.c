@@ -3,7 +3,7 @@
 #define BLOQUE 5
 #define MAX_LINE 100
 
-char * readField(char * line, char delimit, int *pos)
+char * readField(char * line, char delimit, int * pos)
 {
 	char * resp=NULL;
 	int dim=0;
@@ -21,6 +21,50 @@ char * readField(char * line, char delimit, int *pos)
 	resp[dim]=0;
 	return resp;
 }
+
+TFlight readFlight(FILE * flights)
+{
+	char line[MAX_LINE];
+	char * aux;
+	if(fgets(line, MAX_LINE, airports));
+	{
+		TFlight resp=malloc(sizeof(*resp));
+		int pos=0;
+
+		aux=readField(line, ';', &pos);
+		strncpy(resp->date, aux, 10);
+		free(aux);
+
+		aux=readField(line, ';', &pos);
+		strncpy(resp->time, aux, 5);
+		free(aux);
+
+		aux=readField(line, ';', &pos);
+		resp->type=(strcmp(aux,"Internacional")?1:(strcmp(aux,"Cabotaje")?-1:0));
+		free(aux);
+
+		aux=readField(line, ';', &pos);
+		resp->mv=(strcmp(aux,"Aterrizaje"))?1:((strcmp(aux, "Despegue"))?-1:0);
+		free(aux);
+		
+		aux=readField(line, ';', &pos);
+		strncpy(resp->or_oaci, aux, 4);
+		free(aux);
+
+		aux=readField(line, ';', &pos);
+		strncpy(resp->dest_oaci, aux, 4);
+		free(aux);
+
+		aux=readField(line, ';', &pos);
+		resp->name=malloc(strlen(aux)+1);
+		strcpy(resp->airline, aux);
+		free(aux);
+
+		return resp;
+	}
+	return NULL;
+}
+
 
 tAirport readAirport(FILE * airports)
 {
