@@ -15,51 +15,67 @@ char * readField(char * line, char delimit, int * pos)
 	{
 		if(dim%BLOQUE==0)
 			resp=realloc(resp, dim+BLOQUE);
-		resp[dim]=line[*pos];
-		dim++;
-		(*pos)++;
+		resp[dim++]=line[(*pos)++];
 	}
-	if(line[*pos]==delimit)
-		(*pos)++;					/*para que en la proxima invocacion se saltee*/
+	(*pos)++;					/*para que en la proxima invocacion se saltee*/
 	resp=realloc(resp, dim+1);
 	resp[dim]=0;
 	return resp;
 }
 
-/*FALTA SALTEAR CAMPOS QUE NO INTERESAN*/
+void skipFields(char * line, char delimit, int * pos, size_t fields)
+{
+	for(int i=0; i<fields && line[*pos] ;i++)
+	{
+		while(line[*pos]!=delimit && line[*pos])
+			(*pos)++;
+		(*pos)++;
+	}
+}
+
 TFlight readFlight(FILE * flights)
 {
 	char line[MAX_LINE];
 	char * aux;
-	if(fgets(line, MAX_LINE, flights));
+	if(fgets(line, MAX_LINE, flights))
 	{
 		TFlight resp=malloc(sizeof(*resp));
 		int pos=0;
 
+		//FECHA
 		aux=readField(line, ';', &pos);
 		strncpy(resp->date, aux, 10);
 		free(aux);
 
+		//HORA
 		aux=readField(line, ';', &pos);
 		strncpy(resp->time, aux, 5);
 		free(aux);
 
+		//CLASE
+		skipFields(line, ';', &pos, 1);
+
+		//CLASIFICACION
 		aux=readField(line, ';', &pos);
 		resp->type=(strcmp(aux,"Internacional")?1:(strcmp(aux,"Cabotaje")?-1:0));
 		free(aux);
 
+		//TIPO DE MOVIMIENTO
 		aux=readField(line, ';', &pos);
 		resp->mv=(strcmp(aux,"Aterrizaje"))?1:((strcmp(aux, "Despegue"))?-1:0);
 		free(aux);
 		
+		//ORIGEN OACI
 		aux=readField(line, ';', &pos);
 		strncpy(resp->or_oaci, aux, 4);
 		free(aux);
 
+		//DESTINO OACI
 		aux=readField(line, ';', &pos);
 		strncpy(resp->dst_oaci, aux, 4);
 		free(aux);
 
+		//AEROLINEA
 		aux=readField(line, ';', &pos);
 		resp->airline=malloc(strlen(aux)+1);
 		strcpy(resp->airline, aux);
@@ -75,24 +91,25 @@ tAirport readAirport(FILE * airports)
 {
 	char line[MAX_LINE];
 	char * aux;
-	if(fgets(line, MAX_LINE, airports));
+	if(fgets(line, MAX_LINE, airports) && line[0]!='\n')
 	{
+		printf("%s\n", line );
 		tAirport resp=malloc(sizeof(*resp));
 		int pos=0;
 
 		//CODIGO LOCAL 
 		aux=readField(line, ';', &pos);
-		strncpy(resp->local_code, aux, 3);
+		strcpy(resp->local_code, aux);
 		free(aux);
 
 		//CODIGO OACI
 		aux=readField(line, ';', &pos);
-		strncpy(resp->OACI, aux, 4);
+		strcpy(resp->OACI, aux);
 		free(aux);
 
 		//CODIGO IATA
 		aux=readField(line, ';', &pos);
-		strncpy(resp->IATA, aux, 3);
+		strcpy(resp->IATA, aux);
 		free(aux);
 
 		//TIPO 
@@ -106,58 +123,16 @@ tAirport readAirport(FILE * airports)
 		strcpy(resp->name, aux);
 		free(aux);
 
-		//COORDENADAS
-		aux=readField(line, ';', &pos);
-		free(aux);
-
-		//LATITUD
-		aux=readField(line, ';', &pos);
-		free(aux);
-
-		//LONGITUD
-		aux=readField(line, ';', &pos);
-		free(aux);
-
-		//ELEV
-		aux=readField(line, ';', &pos);
-		free(aux);
-
-		//UOM_ELEV
-		aux=readField(line, ';', &pos);
-		free(aux);
-
-		//REF
-		aux=readField(line, ';', &pos);
-		free(aux);
-
-		//DISTANCIA_REF
-		aux=readField(line, ';', &pos);
-		free(aux);
-
-		//DIRECCION_REF
-		aux=readField(line, ';', &pos);
-		free(aux);
+		//COORDENADAS LATITUD LONGITUD ELEV UOM_ELEV REF DISTANCIA_REF DIRECCION_REF
+		skipFields(line, ';', &pos, 8);
 
 		//CONDICION
 		aux=readField(line, ';', &pos);
 		resp->condition=(strcmp(aux,"PUBLICO")==0)?1:((strcmp(aux, "PRIVADO")==0)?2:0);
 		free(aux);
 
-		//CONTROL
-		aux=readField(line, ';', &pos);
-		free(aux);
-
-		//REGION
-		aux=readField(line, ';', &pos);
-		free(aux);
-
-		//FIR
-		aux=readField(line, ';', &pos);
-		free(aux);
-
-		//USO
-		aux=readField(line, ';', &pos);
-		free(aux);
+		//CONTROL REGION FIR USO
+		skipFields(line, ';', &pos, 4);
 
 		//TRAFICO
 		aux=readField(line, ';', &pos);

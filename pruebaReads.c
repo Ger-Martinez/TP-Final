@@ -2,8 +2,8 @@
 #include "funciones.h"
 #include "airportCDT.h"
 
-#define SIZE_FIRST_LINE 182
-#define CANT_AEROPUERTOS 50
+#define SIZE_FIRST_LINE 184
+#define CANT_AEROPUERTOS 5
 
 int 
 main (void)
@@ -35,6 +35,7 @@ main (void)
 		printf("Nombre: %s\n", air->name);
 		printf("Condicion: %s\n", (air->condition==1)?"Publico":((air->condition==2)?"Privado":""));
 		printf("Trafico: %s\n", (air->traffic==1)?"Nacional":((air->traffic==2)?"Internacional":""));
+		free(air->name);
 		free(air);
 		putchar('\n');
 	}
