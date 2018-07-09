@@ -25,7 +25,7 @@ main (void)
 		flight=readFlight(arch);
 		if(flight==NULL)
 		{
-			printf("NO HAY MAS AEROPUERTOS\n");
+			printf("NO HAY MAS VUELOS\n");
 			return 1;
 		}
 		printf("Fecha: %s\n", flight->date);

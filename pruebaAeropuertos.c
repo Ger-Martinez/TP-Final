@@ -31,10 +31,10 @@ main (void)
 		printf("Local: %s\n", air->local_code);
 		printf("OACI: %s\n", air->OACI);
 		printf("IATA: %s\n", air->IATA);
-		printf("Tipo: %s\n", (air->type==1)?"Aeródromo":((air->type==2)?"Helipuerto":""));
+		printf("Tipo: %s\n", (air->type==1)?"Aeródromo":((air->type==-1)?"Helipuerto":""));
 		printf("Nombre: %s\n", air->name);
-		printf("Condicion: %s\n", (air->condition==1)?"Publico":((air->condition==2)?"Privado":""));
-		printf("Trafico: %s\n", (air->traffic==1)?"Nacional":((air->traffic==2)?"Internacional":""));
+		printf("Condicion: %s\n", (air->condition==1)?"Publico":((air->condition==-1)?"Privado":""));
+		printf("Trafico: %s\n", (air->traffic==1)?"Nacional":((air->traffic==-1)?"Internacional":""));
 		free(air->name);
 		free(air);
 		putchar('\n');

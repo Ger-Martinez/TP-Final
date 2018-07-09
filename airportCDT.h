@@ -32,10 +32,10 @@ struct airport {
     char local_code [ 4 ];  // No puede estar vacio
     char OACI [ 5 ];        // Puede estar en blanco
     char IATA [ 4 ];        // Puede estar en blanco
-    int type;               // ( 1 = Aerodromo / 2 = Helipuerto / 0 = En Blanco )
-    char * name;            // debe ser <= 70 y acepta enies y acentos
-    int condition;          // ( 1 = Publico / 2 = Privado / 0 = En Blanco )
-    int traffic;            // ( 1 = Nacional / 2 = Internacional / 0 = En Blanco )
+    int type;               // ( -1 = Helipuerto / 0 = En Blanco / 1 = Aerodromo )
+    char * name;            // debe ser <= 70 y acepta ñ y acentos
+    int condition;          // ( -1 = Privado / 0 = En Blanco / 1 = Publico)
+    int traffic;            // ( -1 = Internacional / 0 = En Blanco / 1 = Nacional )
     TFlight flights;        // Vuelos hacia o desde este aeropuerto
     struct airport * next;  // Siguiente aeropuerto
 
