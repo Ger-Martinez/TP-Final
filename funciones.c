@@ -1,6 +1,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <ctype.h>
 #include "airportCDT.h"
 #include "funciones.h"
 
@@ -37,19 +38,19 @@ TFlight readFlight(FILE * flights)
 {
 	char line[MAX_LINE];
 	char * aux;
-	if(fgets(line, MAX_LINE, flights))
+	if(fgets(line, MAX_LINE, flights) && line[0]!='\n')
 	{
 		TFlight resp=malloc(sizeof(*resp));
 		int pos=0;
 
 		//FECHA
 		aux=readField(line, ';', &pos);
-		strncpy(resp->date, aux, 10);
+		strcpy(resp->date, aux);
 		free(aux);
 
 		//HORA
 		aux=readField(line, ';', &pos);
-		strncpy(resp->time, aux, 5);
+		strcpy(resp->time, aux);
 		free(aux);
 
 		//CLASE
@@ -57,22 +58,28 @@ TFlight readFlight(FILE * flights)
 
 		//CLASIFICACION
 		aux=readField(line, ';', &pos);
-		resp->type=(strcmp(aux,"Internacional")?1:(strcmp(aux,"Cabotaje")?-1:0));
+		resp->type=(strcmp(aux,"Internacional")==0)?1:((strcmp(aux,"Cabotaje")==0)?-1:0);
 		free(aux);
 
 		//TIPO DE MOVIMIENTO
 		aux=readField(line, ';', &pos);
-		resp->mv=(strcmp(aux,"Aterrizaje"))?1:((strcmp(aux, "Despegue"))?-1:0);
+		resp->mv=(strcmp(aux,"Aterrizaje")==0)?1:((strcmp(aux, "Despegue")==0)?-1:0);
 		free(aux);
 		
 		//ORIGEN OACI
 		aux=readField(line, ';', &pos);
-		strncpy(resp->or_oaci, aux, 4);
+		if(strncmp(aux, "SA",2)==0 && isalpha(aux[2]))
+			strcpy(resp->or_oaci, aux);
+		else
+			strcpy(resp->or_oaci, "");
 		free(aux);
 
 		//DESTINO OACI
 		aux=readField(line, ';', &pos);
-		strncpy(resp->dst_oaci, aux, 4);
+		if(strncmp(aux, "SA",2)==0 && isalpha(aux[2]))
+			strcpy(resp->dst_oaci, aux);
+		else
+			strcpy(resp->dst_oaci, "");
 		free(aux);
 
 		//AEROLINEA

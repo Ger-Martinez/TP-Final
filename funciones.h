@@ -10,6 +10,10 @@ char * readField(char * line, char delimit, int *pos);
 /* Almacena una linea del csv en una estructura de aeropuerto, retorna NULL si no hay mas lineas que leer */
 tAirport readAirport(FILE * airports);
 
+/* Almacena una linea del csv en una estructura de vueloo, retorna NULL si no hay mas lineas que leer */
+TFlight readFlight(FILE * flights);
+
+
 /* Compara 2 strings en formato DD/MM/YYYY y retorna positivo si el año del primero
 ** es mayor que el segundo, negativo si el año del segundo es mayor que el primero
 ** y 0 (cero) si los años son iguales
