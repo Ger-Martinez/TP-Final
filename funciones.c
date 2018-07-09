@@ -151,9 +151,9 @@ tAirport readAirport(FILE * airports)
 	return NULL;
 }
 
-int cmpYear(char * date1, char * date2)
+int cmpYear(char * date1, char * year)
 {
-	return strcmp(date1+6, date2+6); /*+6 para saltear DD/MM/ */
+	return strcmp(date1+6, year); /*+6 para saltear DD/MM/ */
 }
 
 int dateToDayOfWeek(char * date)
