@@ -6,7 +6,7 @@
 #include "funciones.h"
 
 #define BLOQUE 5
-#define MAX_LINE 300
+#define MAX_LINE 400
 
 char * readField(char * line, char delimit, int * pos)
 {
@@ -58,12 +58,12 @@ TFlight readFlight(FILE * flights)
 
 		//CLASIFICACION
 		aux=readField(line, ';', &pos);
-		resp->type=(strcmp(aux,"Internacional")==0)?1:((strcmp(aux,"Cabotaje")==0)?-1:0);
+		resp->type=(aux[0]=='I')?1:((aux[0]=='C')?-1:0);
 		free(aux);
 
 		//TIPO DE MOVIMIENTO
 		aux=readField(line, ';', &pos);
-		resp->mv=(strcmp(aux,"Aterrizaje")==0)?1:((strcmp(aux, "Despegue")==0)?-1:0);
+		resp->mv=(aux[0]=='A')?1:((aux[0]=='D')?-1:0);
 		free(aux);
 		
 		//ORIGEN OACI
@@ -100,7 +100,6 @@ tAirport readAirport(FILE * airports)
 	char * aux;
 	if(fgets(line, MAX_LINE, airports) && line[0]!='\n')
 	{
-		printf("%s\n", line );
 		tAirport resp=malloc(sizeof(*resp));
 		int pos=0;
 
@@ -121,7 +120,7 @@ tAirport readAirport(FILE * airports)
 
 		//TIPO 
 		aux=readField(line, ';', &pos);
-		resp->type=(strcmp(aux,"Aeródromo")==0)?1:((strcmp(aux, "Helipuerto")==0)?2:0);
+		resp->type=(aux[0]=='A')?1:((aux[0]=='H')?-1:0);
 		free(aux);
 
 		//NOMBRE
@@ -135,7 +134,7 @@ tAirport readAirport(FILE * airports)
 
 		//CONDICION
 		aux=readField(line, ';', &pos);
-		resp->condition=(strcmp(aux,"PUBLICO")==0)?1:((strcmp(aux, "PRIVADO")==0)?2:0);
+		resp->condition=(aux[1]=='U')?1:((aux[1]=='R')?-1:0);
 		free(aux);
 
 		//CONTROL REGION FIR USO
@@ -143,7 +142,7 @@ tAirport readAirport(FILE * airports)
 
 		//TRAFICO
 		aux=readField(line, ';', &pos);
-		resp->traffic=(strcmp(aux,"Nacional")==0)?1:((strcmp(aux, "Internacional")==0)?2:0);
+		resp->traffic=(aux[0]=='N')?1:((aux[0]=='I')?-1:0);
 		free(aux);
 
 		return resp;
