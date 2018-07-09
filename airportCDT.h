@@ -1,4 +1,8 @@
+#ifndef _airport_CDT_H_
+#define _airport_CDT_H_
+
 #include <stdlib.h>
+#include <stdio.h>
 
 // Flight Structs ...
 
@@ -35,7 +39,7 @@ struct airport {
     TFlight flights;        // Vuelos hacia o desde este aeropuerto
     struct airport * next;  // Siguiente aeropuerto
 
-}
+};
 
 // Functions ...
 
@@ -46,3 +50,4 @@ airportADT newList(void);
 ** Si retorna 0 libera toda la memoria que estaba ocupando en el proceso 
 */
 int fillList(airportADT l, FILE * aeropuertos);
+#endif

@@ -1,6 +1,7 @@
 #ifndef _FUNCIONES_C_
 #define _FUNCIONES_C_
-
+#include <stdio.h>
+#include "airportCDT.h"
 /* Lee los campos de una linea del csv, los campos vacios hacen que devuelva el string vacío
 ** el puntero pos indica desde que posición del string se empieza a leer
 */

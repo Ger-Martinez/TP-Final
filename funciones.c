@@ -1,13 +1,17 @@
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include "airportCDT.h"
 #include "funciones.h"
 
 #define BLOQUE 5
-#define MAX_LINE 100
+#define MAX_LINE 300
 
 char * readField(char * line, char delimit, int * pos)
 {
 	char * resp=NULL;
 	int dim=0;
-	while(line[*pos]!=delimit || line[*pos])
+	while(line[*pos]!=delimit && line[*pos])
 	{
 		if(dim%BLOQUE==0)
 			resp=realloc(resp, dim+BLOQUE);
@@ -22,11 +26,12 @@ char * readField(char * line, char delimit, int * pos)
 	return resp;
 }
 
+/*FALTA SALTEAR CAMPOS QUE NO INTERESAN*/
 TFlight readFlight(FILE * flights)
 {
 	char line[MAX_LINE];
 	char * aux;
-	if(fgets(line, MAX_LINE, airports));
+	if(fgets(line, MAX_LINE, flights));
 	{
 		TFlight resp=malloc(sizeof(*resp));
 		int pos=0;
@@ -52,11 +57,11 @@ TFlight readFlight(FILE * flights)
 		free(aux);
 
 		aux=readField(line, ';', &pos);
-		strncpy(resp->dest_oaci, aux, 4);
+		strncpy(resp->dst_oaci, aux, 4);
 		free(aux);
 
 		aux=readField(line, ';', &pos);
-		resp->name=malloc(strlen(aux)+1);
+		resp->airline=malloc(strlen(aux)+1);
 		strcpy(resp->airline, aux);
 		free(aux);
 
@@ -75,33 +80,88 @@ tAirport readAirport(FILE * airports)
 		tAirport resp=malloc(sizeof(*resp));
 		int pos=0;
 
+		//CODIGO LOCAL 
 		aux=readField(line, ';', &pos);
 		strncpy(resp->local_code, aux, 3);
 		free(aux);
 
+		//CODIGO OACI
 		aux=readField(line, ';', &pos);
 		strncpy(resp->OACI, aux, 4);
 		free(aux);
 
+		//CODIGO IATA
 		aux=readField(line, ';', &pos);
 		strncpy(resp->IATA, aux, 3);
 		free(aux);
 
+		//TIPO 
 		aux=readField(line, ';', &pos);
-		resp->type=(strcmp(aux,"Aeródromo"))?1:((strcmp(aux, "Helipuerto"))?2:0);
+		resp->type=(strcmp(aux,"Aeródromo")==0)?1:((strcmp(aux, "Helipuerto")==0)?2:0);
 		free(aux);
 
+		//NOMBRE
 		aux=readField(line, ';', &pos);
 		resp->name=malloc(strlen(aux)+1);
 		strcpy(resp->name, aux);
 		free(aux);
 
+		//COORDENADAS
 		aux=readField(line, ';', &pos);
-		resp->condition=(strcmp(aux,"PUBLICO"))?1:((strcmp(aux, "PRIVADO"))?2:0);
 		free(aux);
 
+		//LATITUD
 		aux=readField(line, ';', &pos);
-		resp->traffic=(strcmp(aux,"Nacional"))?1:((strcmp(aux, "Internacional"))?2:0);
+		free(aux);
+
+		//LONGITUD
+		aux=readField(line, ';', &pos);
+		free(aux);
+
+		//ELEV
+		aux=readField(line, ';', &pos);
+		free(aux);
+
+		//UOM_ELEV
+		aux=readField(line, ';', &pos);
+		free(aux);
+
+		//REF
+		aux=readField(line, ';', &pos);
+		free(aux);
+
+		//DISTANCIA_REF
+		aux=readField(line, ';', &pos);
+		free(aux);
+
+		//DIRECCION_REF
+		aux=readField(line, ';', &pos);
+		free(aux);
+
+		//CONDICION
+		aux=readField(line, ';', &pos);
+		resp->condition=(strcmp(aux,"PUBLICO")==0)?1:((strcmp(aux, "PRIVADO")==0)?2:0);
+		free(aux);
+
+		//CONTROL
+		aux=readField(line, ';', &pos);
+		free(aux);
+
+		//REGION
+		aux=readField(line, ';', &pos);
+		free(aux);
+
+		//FIR
+		aux=readField(line, ';', &pos);
+		free(aux);
+
+		//USO
+		aux=readField(line, ';', &pos);
+		free(aux);
+
+		//TRAFICO
+		aux=readField(line, ';', &pos);
+		resp->traffic=(strcmp(aux,"Nacional")==0)?1:((strcmp(aux, "Internacional")==0)?2:0);
 		free(aux);
 
 		return resp;
