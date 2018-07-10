@@ -33,7 +33,7 @@ struct airports
 	struct internacional internat;
 	size_t desp;
 	size_t aterr;
-	enum dias dia;
+	enum dias dia; /* Ver si no es mejor hacerlo directamente sobre el vector dia*/
 	struct destinos * dests;
 }
 
