@@ -190,6 +190,6 @@ int dateToDayOfWeek(char * date)
 ** diferencia entre el mes pedido y enero.
 ** +d para ver el dia de la semana dicho dia es.
 ** +0: probando con el 1/5/2018, que es Martes, entonces,
-** (2018+504-20+5+0+1)%7=2508%7=2 como se quiere que el 0 se domingo,
+** (2018+504-20+5+0+1)%7=2508%7=2 como se quiere que el 0 sea domingo,
 ** entonces, se le "suma 0", para que este resultado sea coherente.
 */

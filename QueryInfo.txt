@@ -3,7 +3,7 @@ Aeropuertos:
 local, OACI, IATA, tipo: es avion?, denominación.
 
 Vuelo: Fecha, Hora Movimiento, Clase de vuelo, clasificación Vuelo,
-Tipo de Movimiento, Origen OACI, Destino OACI, Aerolinea Nombre,
+Tipo de Movimiento, Origen OACI, Destino OACI, Aerolinea Nombre.
 
                         Query 1
 Movimientos por aeropuerto, ordenado alfabéticamente por el
@@ -60,7 +60,7 @@ de movimientos, en forma descendente
   Considerar: No debe contener aeropuertos con cero movimientos
 internacionales en el año pedido.
 
-Archivo: "movs_internacional_cant.csv"
+Archivo: "movs_internacion5.csv"
 Formato: El código iata, la cantidad de despegues, la cantidad de aterrizajes,
 la suma de ambas, y el porcentaje (75.33) de vuelos respecto del total,
 
