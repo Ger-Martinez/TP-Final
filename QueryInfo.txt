@@ -56,7 +56,7 @@ provenientes de ese aeropuerto.
 
                         Query 5
 Movimientos internacionales por aeropuerto, ordenado por cantidad
-de movimientos, en forma descendente
+de movimientos en forma descendente
   Considerar: No debe contener aeropuertos con cero movimientos
 internacionales en el año pedido.
 
