@@ -44,10 +44,9 @@ struct airport {
 // Functions ...
 
 /* Crea una nueva lista, devuelve NULL si no hay espacio */
-airportADT newList(void);
+airportADT newAirports(void);
 
-/* Llena la lista con los datos del archivo de aeropuertos, devuelve 1 si se pudo leer y guardar todo el archivo, 0 en caso contrario.
-** Si retorna 0 libera toda la memoria que estaba ocupando en el proceso 
-*/
-int fillList(airportADT l, FILE * aeropuertos);
+
+int add(airportADT l, tAirport airport);
+
 #endif
