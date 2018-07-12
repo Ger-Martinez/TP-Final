@@ -24,7 +24,7 @@ struct internationalCDT
 {
 	tAirportNode first;
 	tAirportNode last; /*para agregar uno nuevo mas rapido*/
-	size_t totalMoves;
+	unsigned int totalMoves;
 	tAirportNode iterator;
 }
 
@@ -38,7 +38,7 @@ struct airportCDT
 {
 	tAirportNode first;
 	tAirportNode iterator;
-	size_t totalMoves;
+	unsigned int totalMoves;
 };
 
 // Airline structs...
@@ -102,7 +102,7 @@ static tAirportNode addMovementRec(tAirportNode first, tAirportNode internationa
 			fprintf(stderr, "Error: No se pudo agregar a la lista intercional\n");
 			return 0;
 		}*/
-		
+
 		aux->next=first;
 		*added=1;
 		return aux;
