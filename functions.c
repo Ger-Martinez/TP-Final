@@ -68,18 +68,14 @@ tFlight readFlight(FILE * flights)
 
 		//ORIGEN OACI
 		aux=readField(line, ';', &pos);
-		if(strncmp(aux, "SA",2)==0 && isalpha(aux[2]))
-			strcpy(resp->orOaci, aux);
-		else
-			strcpy(resp->orOaci, "");
+		resp->orOaci=malloc(strlen(aux)+1);
+		strcpy(resp->orOaci, aux);
 		free(aux);
 
 		//DESTINO OACI
 		aux=readField(line, ';', &pos);
-		if(strncmp(aux, "SA",2)==0 && isalpha(aux[2]))
-			strcpy(resp->dstOaci, aux);
-		else
-			strcpy(resp->dstOaci, "");
+		resp->dstOaci=malloc(strlen(aux)+1);
+		strcpy(resp->dstOaci, aux);
 		free(aux);
 
 		//AEROLINEA
