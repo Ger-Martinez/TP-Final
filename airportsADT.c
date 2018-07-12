@@ -1,4 +1,5 @@
-#include "airportsCDT.h"
+#include "airportsADT.h"
+#include <stdio.h>
 
 typedef struct airlineNode * tAirlineNode;
 typedef struct airportNode * tAirportNode;
@@ -11,9 +12,9 @@ struct flightNode
 {
 	tFlight flight;
 	struct flightNode * next;
-}
+};
 
-struct flightCDT
+struct flightCDT // First List ...
 {
 	tFlightNode first;
 };
@@ -23,10 +24,10 @@ struct flightCDT
 struct internationalCDT
 {
 	tAirportNode first;
-	tAirportNode last; /*para agregar uno nuevo mas rapido*/
-	size_t totalMoves;
+	tAirportNode last; /* para agregar uno nuevo mas rapido */
 	tAirportNode iterator;
-}
+	size_t totalMoves;
+};
 
 struct airportNode
 {
@@ -76,17 +77,17 @@ struct destinationCDT
 airportADT newAirportList(void)
 {
 	return calloc(1, sizeof(struct airportCDT));
-}
+};
 
 internationalADT newInternationalList(void)
 {
 	return calloc(1, sizeof(struct internationalCDT));
-}
+};
 
-static tAirportNode addMovementRec(tAirportNode first, tAirportNode internationalFirst, tFlight flight, FILE * airportFile, int * added)
+static tAirportNode addMovementRec(tAirportNode first, internationalADT internationalFirst, tFlight flight, FILE * airportFile, int * added)
 {
 	int c;
-	if(first==NULL || (c=strcmp(first->oaci, flight->oaci)>0))
+	if(first==NULL || (c=strcmp(first->airport->oaci, flight->orOaci)>0))
 	{
 		tAirportNode aux=malloc(sizeof(*aux));
 		if(aux==NULL)
@@ -94,7 +95,7 @@ static tAirportNode addMovementRec(tAirportNode first, tAirportNode internationa
 			fprintf(stderr, "Error: no se pudo reservar memoria en el heap para un aeropuerto\n");
 			return 0;
 		}
-		copyAirport(aux->airport, flight->oaci, airportFile);
+		//copyAirport(aux->airport, flight->orOaci, airportFile);
 		/*if(aux->airport->international.isInternat)
 			addInterList(aux, internationalFirst, added);
 		if(!added)
@@ -102,7 +103,7 @@ static tAirportNode addMovementRec(tAirportNode first, tAirportNode internationa
 			fprintf(stderr, "Error: No se pudo agregar a la lista intercional\n");
 			return 0;
 		}*/
-		
+
 		aux->next=first;
 		*added=1;
 		return aux;
@@ -121,9 +122,9 @@ int addMovement(airportADT airportList, internationalADT internationalList, tFli
 		return 0;
 	}
 	int added;
-	airportList->first=addMovementRec(list->first, internationalList, flight, &added);
+	airportList->first=addMovementRec(airportList->first, internationalList, flight, airportFile, &added);
 	if(!added)
 		fprintf(stderr, "Error: No se pudo agregar un aeropuerto a la lista comun\n");
-	(list->totalMoves)+=added;
+	(airportList->totalMoves)+=added;
 	return added;
 }
