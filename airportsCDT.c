@@ -1,4 +1,4 @@
-#include "posCDT.h"
+#include "airportsCDT.h"
 
 typedef struct airlineNode * tAirlineNode;
 typedef struct airportNode * tAirportNode;
