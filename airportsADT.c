@@ -24,7 +24,12 @@ struct flightCDT // First List ...
 struct internationalCDT
 {
 	tAirportNode first;
+<<<<<<< HEAD:airportsCDT.c
+	tAirportNode last; /*para agregar uno nuevo mas rapido*/
+	unsigned int totalMoves;
+=======
 	tAirportNode last; /* para agregar uno nuevo mas rapido */
+>>>>>>> 8438e2e4f676768b60c42b32187764fcb75b6be8:airportsADT.c
 	tAirportNode iterator;
 	size_t totalMoves;
 };
@@ -39,7 +44,7 @@ struct airportCDT
 {
 	tAirportNode first;
 	tAirportNode iterator;
-	size_t totalMoves;
+	unsigned int totalMoves;
 };
 
 // Airline structs...

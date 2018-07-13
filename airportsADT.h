@@ -36,8 +36,8 @@ struct airport
 	int type;
 	int condition;
 	int isInternational;
-	size_t takeOffs;
-	size_t landings;
+	unsigned int takeOffs;
+	unsigned int landings;
 	enum days day;
 	destinationADT destinations;	/* Lista de struct destination */
 };
@@ -45,14 +45,14 @@ struct airport
 struct destination
 {
 	char * oaci; /* debo poner char * por los codigos del tipo AR-XXXX sino seria char dest[5]*/
-	size_t landings;
-	size_t takeOffs;
+	unsigned int landings;
+	unsigned int takeOffs;
 };
 
 struct airline
 {
 	char * name;
-	size_t movs;
+	unsigned int movs;
 };
 
 #endif
