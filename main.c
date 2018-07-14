@@ -16,7 +16,7 @@ main (void)
 		printf("Error: Alguno de los archivos se pudo abrir\n");
 		return 1;
 	}
-	
+
 	/* Salteo la primera linea de titulos del archivo de vuelos */
 	char * trash=malloc(SIZE_FIRST_LINE_F+2);
 	fgets(trash, SIZE_FIRST_LINE_F, archF);
@@ -28,10 +28,10 @@ main (void)
 	free(trash);
 
     /* Comienzo a trabajar */
-    airportADT ap = newAirportList();
+  airportADT ap = newAirportList();
 
 
-    addAirports( ap , archA , archF );
+	addAirports( ap , archA , archF );
 	showMeAirpots( ap );
 
 	return 0;
