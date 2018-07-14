@@ -1,31 +1,20 @@
-#ifndef _POSCDT_H_
-
-#define _POSCDT_H_
+#ifndef _AIRPORTSADT_H_
+#define _AIRPORTSADT_H_
 
 #include <stdlib.h>
 
 
-
 typedef struct flightCDT * flightADT;
-
 typedef struct airportCDT * airportADT;
-
 typedef struct airlineQueryCDT * airlineQueryADT;
-
 typedef struct destinationCDT * destinationADT;
-
 typedef struct internationalCDT * internationalADT;
-
 typedef struct airline * tAirline;
-
 typedef struct airport * tAirport;
-
 typedef struct flight * tFlight;
-
 typedef struct destination * tDestination;
 
 enum days {SUN=0, MON, TUE, WED, THU, FRI, SAT};
-
 
 struct flight
 {
@@ -66,4 +55,5 @@ struct airline
 	char * name;
 	unsigned int movs;
 };
+
 #endif
