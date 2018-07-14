@@ -12,7 +12,7 @@ struct internationalCDT
 	tAirportNode first;
 	tAirportNode last; /* para agregar uno nuevo mas rapido */
 	tAirportNode iterator;
-	size_t totalMoves;
+	unsigned int totalMoves;
 };
 
 struct airportNode
@@ -182,5 +182,3 @@ internationalADT newInternationalList(void)
 {
 	return calloc(1, sizeof(struct internationalCDT));
 };
-
-

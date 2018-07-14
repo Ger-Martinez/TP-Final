@@ -30,7 +30,7 @@ struct flight
 
 struct airport
 {
-    char * oaci;
+  char * oaci;
 	char local[4];
 	char * name;
 	char iata[4];
