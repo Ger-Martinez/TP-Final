@@ -44,7 +44,7 @@ tFlight readFlight(FILE * flights)
 		int pos=0;
 		//FECHA
 		aux=readField(line, ';', &pos);
-        strcpy(resp->date, aux);
+    strcpy(resp->date, aux);
 		free(aux);
 
 		//HORA
@@ -66,14 +66,19 @@ tFlight readFlight(FILE * flights)
 		free(aux);
 
 		//ORIGEN OACI
-        aux=readField(line, ';', &pos);
+		/* SUGERENCIA:
+		 para los 3 de abajo el aux del readfield y el nuevo malloc son iguales
+		 tmbn par oaci y name de readAirport
+		 se puede poner simplemente resp -> * = readfield(*,*,*);
+		*/
+    aux=readField(line, ';', &pos);
 		resp -> orOaci = malloc( strlen ( aux ) + 1 );
 		strcpy(resp->orOaci, aux);
 		free(aux);
 
 		//DESTINO OACI
 		aux=readField(line, ';', &pos);
-        resp -> dstOaci = malloc( strlen ( aux ) + 1 );
+    resp -> dstOaci = malloc( strlen ( aux ) + 1 );
 		strcpy(resp->dstOaci, aux);
 		free(aux);
 
@@ -121,7 +126,7 @@ tAirport readAirport(FILE * airports)
 		free(aux);
 
 		//NOMBRE
-        aux=readField(line, ';', &pos);
+    aux=readField(line, ';', &pos);
 		resp->name=malloc(strlen(aux)+1);
 		strcpy(resp->name, aux);
 		free(aux);
@@ -143,7 +148,7 @@ tAirport readAirport(FILE * airports)
         resp->isInternational=(aux[0]=='N')?1:((aux[0]=='I')?-1:0);
 		free(aux);
 
-        return resp;
+    return resp;
 	}
 	return NULL;
 }
@@ -157,8 +162,8 @@ int cmpYear(char * date1, char * year)
 
 int dateToDayOfWeek(char * date)
 {
-	int d, m, y;
-    d = m = y = 0;
+	int d, m, y;			// Sugerencia?:
+  d = m = y = 0; // Hace falta setearlos en 0 si vas a asignarle un nuevo valor abajo?
 	sscanf(date, "%2d/%2d/%4d", &d, &m, &y);
 	int monthDay[12] = {0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4};
 	if(m<3)
@@ -166,28 +171,28 @@ int dateToDayOfWeek(char * date)
 	return (y+y/4 -y/100 +y/400 +monthDay[m-1]+d)%7;
 }
 
-/* si m=1 o m=2 entonces y=y-1 sino y=y, asi los "años" se tomaran desde
-** marzo y los dias extras de los años bisiestos se consideran al final
+/* si m=1 o m=2 entonces y=y-1 sino y=y, asi los "aï¿½os" se tomaran desde
+** marzo y los dias extras de los aï¿½os bisiestos se consideran al final
 ** para asi poder armar un unico vector monthDay.
 */
 
-/* Explicación de monthDay:
-** distancia de dias de la semana desde el 1° de cada mes hasta el
-** 1° de enero en un año no bisiesto.
+/* Explicaciï¿½n de monthDay:
+** distancia de dias de la semana desde el 1ï¿½ de cada mes hasta el
+** 1ï¿½ de enero en un aï¿½o no bisiesto.
 ** mesAct=(mesAnt+cantDiasAnt)%7
 ** Notese que en marzo se resta un dia a porque se usa el febrero del
-** "año anterior".
+** "aï¿½o anterior".
 ** Ene:0
 ** Feb:(0+31)%7=3 Mar:(2+28)%7=2 Abr:(2+31)%7=5 May:(5+30)%7=0
 ** Jun:(0+31)%7=3 Jul:(3+30)%7=5 Ago:(5+31)%7=1 Sep:(1+31)%7=4
 ** Oct:(4+30)%7=6 Nov:(6+31)%7=2 Dic:(2+30)%7:4
 */
 
-/* Explicación de la fórmula:
-** +y porque 365%7=1 entonces se suma un dia por año que pasa.
-** +y/4 porque se suma un dia extra por año bisiesto que pasa.
-** -y/100 porque un año no es bisiesto si es multiplo de 100.
-** +y/400 porque un año es bisiesto si es multiplo de 400.
+/* Explicaciï¿½n de la fï¿½rmula:
+** +y porque 365%7=1 entonces se suma un dia por aï¿½o que pasa.
+** +y/4 porque se suma un dia extra por aï¿½o bisiesto que pasa.
+** -y/100 porque un aï¿½o no es bisiesto si es multiplo de 100.
+** +y/400 porque un aï¿½o es bisiesto si es multiplo de 400.
 ** +t[m-1] porque son la cantidad de dias de la semana de
 ** diferencia entre el mes pedido y enero.
 ** +d para ver el dia de la semana dicho dia es.

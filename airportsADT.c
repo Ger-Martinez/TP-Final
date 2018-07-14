@@ -130,8 +130,8 @@ static tAirlineNode addAirlineRec ( tAirlineNode a , const char * airlineName )
         tAirline temp = malloc(sizeof(*temp));
         temp -> name = malloc(strlen( airlineName ) +1);
         strcpy( temp -> name , airlineName );
-        temp -> movs = 0;
-        ( temp -> movs ) ++;
+        temp -> movs = 0;			// sugerencia: temp -> movs = 1; dsps borrar
+        ( temp -> movs ) ++; //  ^
         tAirlineNode newNode = malloc(sizeof(*newNode));
         newNode -> airline = temp;
         newNode -> next = NULL;
