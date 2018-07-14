@@ -9,6 +9,7 @@ typedef struct airportCDT * airportADT;
 typedef struct airlineQueryCDT * airlineQueryADT;
 typedef struct destinationCDT * destinationADT;
 typedef struct internationalCDT * internationalADT;
+
 typedef struct airline * tAirline;
 typedef struct airport * tAirport;
 typedef struct flight * tFlight;
@@ -25,7 +26,6 @@ struct flight
     char * orOaci;		/* No puede estar en blanco */
     char * dstOaci;		/* No puede estar en blanco y puede contener codigos que no sean aeropuertos conocidos */
     char * airline;
-
 };
 
 struct airport
@@ -55,5 +55,17 @@ struct airline
 	char * name;
 	unsigned int movs;
 };
+
+//Functions... (HACER DESCRIPCIONES)
+airportADT newAirportList(void);
+void addAirports ( airportADT ap , FILE * f );
+void addMovement( airportADT airportList , tFlight flight );
+/*BORRAR*/
+void showMeAirpots ( airportADT ap );
+
+airlineQueryADT newAirlineList(void);
+void addAirlines ( airlineQueryADT airl , const char * airline );
+/*BORRAR*/
+void showMeAirlines ( airlineQueryADT a );
 
 #endif
