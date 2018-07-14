@@ -29,13 +29,10 @@ main (void)
 
     /* Comienzo a trabajar */
     airportADT ap = newAirportList();
-    flightADT f = newFlightList();
-    airlineQueryADT ar = newAirlineList();
 
-	addAirports( ap , archA );
-	addFlights( ap , ar , f , "2014" , archF );
 
-	showMeAirlines( ar );
+    addAirports( ap , archA , archF );
+	showMeAirpots( ap );
 
 	return 0;
 }
