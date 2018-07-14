@@ -22,7 +22,7 @@ main (void)
 	FILE * archA=fopen("aeropuertos_detalle.csv", "r");
 	if( archA ==NULL || archF == NULL)
 	{
-		printf("Error: Alguno de los archivos se pudo abrir :( \n");
+		printf("Error: Alguno de los archivos no se pudo abrir :( \n");
 		return 1;
 	}
 	/* Salteo la primera linea de titulos del archivo de Vuelos */
@@ -37,13 +37,10 @@ main (void)
 
     /* Comienzo a trabajar */
     airportADT ap = newAirportList();
-    flightADT f = newFlightList();
-    airlineQueryADT ar = newAirlineList();
 
-	addAirports( ap , archA );
-	addFlights( ap , ar , f , "2014" , archF );
 
-	showMeAirlines( ar );
+    addAirports( ap , archA , archF );
+	showMeAirpots( ap );
 
 
 	return 0;

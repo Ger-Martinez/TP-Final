@@ -39,14 +39,13 @@ tFlightNode addFlightsRec ( tFlightNode fghtN , tFlight toAdd , const char * yea
     }
 }
 
-void addFlights ( airportADT ap , airlineQueryADT ar , flightADT fght , const char * year , FILE * f ){
+void addFlights ( airlineQueryADT ar , flightADT fght , const char * year , FILE * f ){
     tFlight toAdd = readFlight( f );
-    int pos = 100;
+    int pos = 5000;
     while ( toAdd && pos ){
 
         if ( cmpYear( toAdd -> date , year ) == 0){
             fght -> first = addFlightsRec ( fght -> first , toAdd , year );
-            addMovement ( ap , toAdd );
             addAirlines ( ar , toAdd -> airline );
             ( fght -> howMany )++;
         }
@@ -54,6 +53,25 @@ void addFlights ( airportADT ap , airlineQueryADT ar , flightADT fght , const ch
         toAdd = readFlight( f );
     }
     printf("( There have been %d flights in %s ) \n" , fght -> howMany , year );
+}
+
+
+tAirportNode showMeFlightsRec ( tFlightNode flightN ){
+    if ( flightN != NULL ){
+        printf("Airline: %s \n", flightN -> flight -> airline );
+        printf("Date: %s \n", flightN -> flight -> date );
+		printf("Time: %s \n", flightN -> flight -> time );
+		printf("Tipo: %s \n", ( flightN -> flight -> type == 1 ) ? "Internacional" : ( ( flightN -> flight -> type == -1 ) ? "Cabotaje" : ""));
+		printf("Is %s \n", ( flightN -> flight -> mov ) ? "taking off" : ( ( flightN -> flight -> type == -1 ) ? "landing" : "") );
+		printf("Or. Oaci: %s \n", flightN -> flight -> orOaci );
+		printf("Dst. Oaci: %s \n", flightN -> flight -> dstOaci );
+		printf("\n");
+		showMeFlightsRec( flightN -> next );
+    }
+}
+
+void showMeFlights ( flightADT fght ){
+    showMeFlightsRec ( fght -> first );
 }
 
 // Airports structs ...
@@ -87,38 +105,95 @@ airportADT newAirportList(void)
 	return calloc(1, sizeof(struct airportCDT));
 };
 
-tAirportNode addAirportRec ( tAirportNode airpN , tAirport a ){
+void complete ( tAirportNode  airpN , FILE * f ){
+    tAirportNode aux = airpN;
+    tAirport ap = readAirport( f );
+    while ( ap ){
+        while ( aux ){
+            if ( strcmp ( ap -> oaci , airpN -> airport -> oaci ) == 0 ){
+                strcpy ( airpN -> airport -> local , ap -> local );
+                airpN -> airport -> name = malloc ( sizeof ( strlen ( ap -> name ) + 1 ) );
+                strcpy ( airpN -> airport -> name , ap -> name );
+                strcpy ( airpN -> airport -> iata , ap -> iata );
+                airpN -> airport -> type = ap -> type;
+                airpN -> airport -> condition = ap -> condition;
 
-    if ( airpN == NULL ){
-        tAirportNode temp = malloc( sizeof ( struct airportNode ) );
-        temp -> airport = a;
-        temp -> next = NULL;
-        return temp;
-    } else {
-        int n = strcasecmp( airpN -> airport -> local , a -> local );
-        if ( n < 0 ){
-            airpN -> next = addAirportRec( airpN , a );
-            return airpN;
-        } else {
-            tAirportNode temp = malloc( sizeof ( struct airportNode ) );
-            temp -> airport = a;
-            temp -> next = airpN;
-            return temp;
+            }
+            aux = aux -> next;
         }
-        airpN -> next = addAirportRec( airpN -> next , a );
+        aux = airpN;
+        ap = readAirport( f );
     }
 }
 
-void addAirports ( airportADT ap , FILE * f ){
-    tAirport toAdd = readAirport( f );
-    while ( toAdd ){
-        if ( strlen( toAdd -> oaci ) != 0 ){
-            ap -> first = addAirportRec ( ap -> first , toAdd );
-            ( ap -> howMany )++;
+tAirportNode addAirportRec ( tAirportNode airpN , tFlight fght  ){
+    if ( airpN == NULL ){
+        // Primero creo el aeropuerto como estructura ...
+        tAirport newAdd = malloc ( sizeof ( struct airport ) );
+        newAdd -> takeOffs = 0;
+        newAdd -> landings = 0;
+        newAdd -> type = 0;
+        newAdd -> condition = 0;
+        newAdd -> name = NULL;
+        newAdd -> oaci = malloc ( sizeof ( strlen ( fght -> orOaci ) + 1 ) ); // copio OACI
+
+        strcpy ( newAdd -> oaci , fght -> orOaci );
+        newAdd -> isInternational = fght -> type;  // copio isInternational
+        if ( fght -> mov = 1 )
+            ( newAdd -> landings ) ++;
+        else
+            ( newAdd -> takeOffs ) ++;
+        // Ahora creo el nodo de un aeropuerto y agrego newAdd a la lista ...
+        tAirportNode temp = malloc( sizeof ( struct airportNode ) );
+        temp -> airport = newAdd;
+        temp -> next = NULL;
+        return temp;
+    } else {
+        int n = strcasecmp( airpN -> airport -> oaci , fght -> orOaci );
+        if ( n < 0 ){
+            airpN -> next = addAirportRec( airpN -> next , fght );
+            return airpN;
+        } else if ( n > 0) {
+            // Primero creo el aeropuerto como estructura ...
+            tAirport newAdd = malloc ( sizeof ( struct airport ) );
+            newAdd -> takeOffs = 0;
+            newAdd -> landings = 0;
+            newAdd -> type = 0;
+            newAdd -> condition = 0;
+            newAdd -> name = NULL;
+            newAdd -> oaci = malloc ( sizeof ( strlen ( fght -> orOaci ) + 1 ) ); // copio OACI
+            strcpy ( newAdd -> oaci , fght -> orOaci );
+            newAdd -> isInternational = fght -> type; // copio isInternational
+            if ( fght -> mov = 1 )
+                ( newAdd -> landings ) ++;
+            else
+                ( newAdd -> takeOffs ) ++;
+            // Ahora creo el nodo de un aeropuerto y agrego newAdd a la lista ...
+            tAirportNode temp = malloc( sizeof ( struct airportNode ) );
+            temp -> airport = newAdd;
+            temp -> next = airpN;
+            return temp;
+        } else {
+            if ( fght -> mov = 1 )
+                ( airpN -> airport -> landings ) ++;
+            else
+                ( airpN -> airport -> takeOffs ) ++;
+            return airpN;
         }
-        toAdd = readAirport( f );
+        airpN -> next = addAirportRec( airpN -> next , fght );
     }
-    printf("( There are %d airports ) \n" , ap -> howMany );
+    return airpN;
+}
+
+void addAirports ( airportADT ap , FILE * a , FILE * f ){
+    tFlight fght = readFlight ( f );
+    int printLimit = 100;
+    while ( fght && printLimit ){
+        ap -> first = addAirportRec ( ap -> first , fght );
+        fght = readFlight ( f );
+        printLimit --;
+    }
+    //complete ( ap -> first , a );
 }
 
 static void addMovementRec( tAirportNode airpN , tFlight flight ){
@@ -144,13 +219,12 @@ void addMovement( airportADT airportList , tFlight flight )
 
 tAirportNode showMeAirpotsRec ( tAirportNode airpN ){
     if ( airpN != NULL ){
+
+		printf("OACI: %s\n", airpN -> airport ->oaci);
         printf("Local: %s\n", airpN-> airport ->local);
-		printf("OACI: %s\n", airpN-> airport ->oaci);
 		printf("IATA: %s\n", airpN-> airport -> iata);
 		printf("Tipo: %s\n", (airpN-> airport -> type==1)?"Aeródromo":((airpN-> airport ->type==-1)?"Helipuerto":""));
 		printf("Nombre: %s\n", airpN-> airport ->name);
-		printf("Aterrizajes: %d\n", airpN -> airport -> landings );
-		printf("Despegues: %d\n", airpN-> airport -> takeOffs);
 		printf("Condicion: %s\n", (airpN-> airport ->condition==1)?"Publico":((airpN-> airport ->condition==-1)?"Privado":""));
 		printf("Trafico: %s\n", (airpN-> airport ->isInternational==1)?"Nacional":((airpN-> airport ->isInternational==-1)?"Internacional":""));
 		printf("\n");
@@ -210,19 +284,6 @@ void addAirlines ( airlineQueryADT airl , const char * airline ){
 
     airl -> first = addAirlineRec ( airl -> first , airline );
     return 0;
-}
-
-tAirportNode showMeAirlinesRec ( tAirlineNode airN ){
-    if ( airN != NULL ){
-        printf("Airline: %s\n", airN-> airline -> name );
-		printf("Movements: %d\n", airN-> airline -> movs );
-		printf("\n");
-		showMeAirlinesRec( airN -> next );
-    }
-}
-
-void showMeAirlines ( airlineQueryADT a ){
-    showMeAirlinesRec ( a -> first );
 }
 
 // Destinations structs...
