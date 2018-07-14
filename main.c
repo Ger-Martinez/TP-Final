@@ -1,29 +1,51 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
-#define MIN_YEAR "2014"
-#define MAX_YEAR "2018"
+#include "functions.h"
+
+#include "airportsADT.h"
+
+#define SIZE_FIRST_LINE_A 184
+
+#define SIZE_FIRST_LINE_F 144
+
+#define CANT_AEROPUERTOS 5
 
 
-// Testing
-int main ( int argc , const char *argv[] ){
 
-	if ( argc != 2 ){
-		printf("Error: Ingresar solo un argumento\n");
+int
+
+main (void)
+
+{
+
+	FILE * archF=fopen("eana1401-1802.csv", "r");
+	FILE * archA=fopen("aeropuertos_detalle.csv", "r");
+	if( archA ==NULL || archF == NULL)
+	{
+		printf("Error: Alguno de los archivos se pudo abrir :( \n");
 		return 1;
 	}
-    char year[5];
-	strncpy(year, arcgv[1], 4);
-	if( strcmp( year , MIN_YEAR ) < 0 || strcmp ( year , MAX_YEAR ) > 0 ){
-		printf( "Error: Ingresar un año que esté entre %d y %d\n" , MIN_YEAR , MAX_YEAR );
-		return 2;
-	}
-	FILE * aeropuertos, * movimientos;
-	if ( ( aeropuertos=fopen("aeropuertos_detalle.csv", "r" ) ) || ( movimientos=fopen("eana1401-1802.csv", "r" ) ) ){
-		printf("Error: No se pudo abrir un archivo\n");
-		return 3;
-	}
-	doQueries ( aeropuertos , movimientos , year );
+	/* Salteo la primera linea de titulos del archivo de Vuelos */
+	char * trash=malloc(SIZE_FIRST_LINE_F+2);
+	fgets(trash, SIZE_FIRST_LINE_F, archF);
+	free(trash);
+
+	/* Salteo la primera linea de titulos del archivo de Aeropuertos */
+	trash=malloc(SIZE_FIRST_LINE_A+2);
+	fgets(trash, SIZE_FIRST_LINE_A, archA);
+	free(trash);
+
+    /* Comienzo a trabajar */
+    airportADT ap = newAirportList();
+    flightADT f = newFlightList();
+    airlineQueryADT ar = newAirlineList();
+
+	addAirports( ap , archA );
+	addFlights( ap , ar , f , "2014" , archF );
+
+	showMeAirlines( ar );
+
+
 	return 0;
+
 }
