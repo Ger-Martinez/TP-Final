@@ -24,7 +24,7 @@ struct airportNode
 struct airportCDT
 {
 	tAirportNode first;
-	tAirportNode iterator;
+	tAirportNode iterator; // uso?
 	unsigned int howMany;
 	unsigned int totalMoves;
 };
@@ -45,11 +45,25 @@ static tAirportNode addAirportRec ( tAirportNode first , tAirport a )
         temp -> next = first;
         return temp;
     }
-    /* Se asume que no hay 2 aeropuertos con mismo OACI */
-    first -> next = addAirportRec( first , a );
+    /* Se asume que no hay 2 aeropuertos con el mismo OACI */
+    first -> next = addAirportRec( first , a ); // loop infinito
     return first;
 }
-
+/*	oaci en vez de local? + correccion
+static tAirportNode addAirportRec ( tAirportNode first , tAirport newAp )
+{
+    if(first == NULL || (strcmp( first -> airport -> oaci , newAp -> oaci )>0))
+    {
+        tAirportNode aux = malloc(sizeof(*aux));
+        aux -> airport = newAp;
+        aux -> next = first;
+        return aux;
+    }
+    // Se asume que no hay 2 aeropuertos con el mismo OACI
+    first -> next = addAirportRec( first -> next , newAp );
+    return first;
+}
+*/
 void addAirports ( airportADT ap , FILE * f )
 {
     tAirport toAdd=readAirport( f );
