@@ -69,5 +69,6 @@ airlineQueryADT newAirlineList(void);
 void addAirlines ( airlineQueryADT airl , const char * airline );
 /*BORRAR*/
 void showMeAirlines ( airlineQueryADT a );
+unsigned int * vecDays(airportsADT airports);
 
 #endif
