@@ -66,22 +66,13 @@ tFlight readFlight(FILE * flights)
 		free(aux);
 
 		//ORIGEN OACI
-        aux=readField(line, ';', &pos);
-		resp -> orOaci = malloc( strlen ( aux ) + 1 );
-		strcpy(resp->orOaci, aux);
-		free(aux);
+		resp -> orOaci = readField(line, ';', &pos);
 
 		//DESTINO OACI
-		aux=readField(line, ';', &pos);
-        resp -> dstOaci = malloc( strlen ( aux ) + 1 );
-		strcpy(resp->dstOaci, aux);
-		free(aux);
+        resp -> dstOaci = readField(line, ';', &pos);
 
 		//AEROLINEA
-		aux=readField(line, ';', &pos);
-		resp->airline=malloc(strlen(aux)+1);
-		strcpy(resp->airline, aux);
-		free(aux);
+		resp->airline=readField(line, ';', &pos);
 
 		return resp;
 	}
@@ -106,10 +97,7 @@ tAirport readAirport(FILE * airports)
 		free(aux);
 
 		//CODIGO OACI
-		aux=readField(line, ';', &pos);
-		resp -> oaci = malloc( strlen ( aux ) + 1 );
-		strcpy(resp->oaci, aux);
-		free(aux);
+		resp -> oaci = readField(line, ';', &pos);
 
 		//CODIGO IATA
 		aux=readField(line, ';', &pos);
@@ -122,10 +110,8 @@ tAirport readAirport(FILE * airports)
 		free(aux);
 
 		//NOMBRE
-        aux=readField(line, ';', &pos);
-		resp->name=malloc(strlen(aux)+1);
-		strcpy(resp->name, aux);
-		free(aux);
+
+		resp->name=readField(line, ';', &pos);
 
 		//COORDENADAS LATITUD LONGITUD ELEV UOM_ELEV REF DISTANCIA_REF DIRECCION_REF
 

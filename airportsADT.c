@@ -130,7 +130,7 @@ void addMovements( airportADT airportList , FILE * f )
             }
             if ( strcmp( aux -> airport -> oaci , toAdd -> dstOaci ) == 0 ){
                 ( aux -> airport -> landings)++;
-                aux -> airport -> destinations -> first = addDestination( aux -> airport -> destinations -> first , toAdd -> dstOaci , 1 );
+                aux -> airport -> destinations -> first = addDestination( aux -> airport -> destinations -> first , toAdd -> orOaci , 1 );
             }
         }
         toAdd = readFlight( f );
@@ -193,8 +193,7 @@ static tAirlineNode addAirlineRec ( tAirlineNode a , const char * airlineName )
         tAirline temp = malloc(sizeof(*temp));
         temp -> name = malloc(strlen( airlineName ) +1);
         strcpy( temp -> name , airlineName );
-        temp -> movs = 0;
-        ( temp -> movs ) ++;
+        temp -> movs = 1;
         tAirlineNode newNode = malloc(sizeof(*newNode));
         newNode -> airline = temp;
         newNode -> next = NULL;
