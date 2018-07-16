@@ -38,7 +38,6 @@ struct airport
 	int isInternational;
 	unsigned int takeOffs;
 	unsigned int landings;
-	enum days day;
 	destinationADT destinations;	/* Lista de struct destination */
 };
 
@@ -75,6 +74,13 @@ airlineQueryADT newAirlineList(void);
 void addAirlines ( airlineQueryADT airl , const char * airline );
 /*BORRAR*/
 void showMeAirlines ( airlineQueryADT a );
-unsigned int * vecDays(airportsADT airports);
+void toBeginAirport(airportADT airport);
+int hasNextAirport(airportADT airport);
+tAirport nextAirport(airportADT airport);
+void toBeginDestination(destinationADT destination);
+int hasNextDestination(destinationADT destination);
+tDestination nextDestination(destinationADT destination);
+
 
 #endif
+

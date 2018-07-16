@@ -76,7 +76,7 @@ struct airportCDT
 {
 	tAirportNode first;
 	tAirportNode iterator;
-	unsigned int howMany;
+	unsigned int days [7];
 	unsigned int totalMoves;
 };
 
@@ -110,14 +110,13 @@ void addAirports ( airportADT ap , FILE * a )
         if(toAdd -> oaci[0])
         {
             ap -> first = addAirportRec ( ap -> first , toAdd );
-            (ap -> howMany)++;  /*BORRAR JUNTO CON {}*/
         }
         toAdd = readAirport( a );
         pos -- ;
     }
 }
 
-void addMovements( airportADT airportList , internationalCDT interList, FILE * f )
+void addMovements( airportADT airportList , internationalADT interList, FILE * f )
 {
 	if( airportList==NULL )
 	{
@@ -126,6 +125,7 @@ void addMovements( airportADT airportList , internationalCDT interList, FILE * f
 	}
 	tFlight toAdd;
     tAirportNode aux;
+
     for ( toAdd=readFlight(f); toAdd; toAdd = readFlight( f ))
     {
         for( aux = airportList -> first ; aux ; aux = aux -> next )
@@ -133,10 +133,12 @@ void addMovements( airportADT airportList , internationalCDT interList, FILE * f
             if ( strcmp( aux -> airport -> oaci , toAdd -> orOaci ) == 0 ){
                 ( aux -> airport -> takeOffs )++;
                 aux -> airport -> destinations -> first = addDestination( aux -> airport -> destinations -> first , toAdd -> dstOaci , -1 );
+                (airportList -> days [dateToDayOfWeek(toAdd->date)])++;
             }
             if ( strcmp( aux -> airport -> oaci , toAdd -> dstOaci ) == 0 ){
                 ( aux -> airport -> landings)++;
                 aux -> airport -> destinations -> first = addDestination( aux -> airport -> destinations -> first , toAdd -> orOaci , 1 );
+                (airportList -> days [dateToDayOfWeek(toAdd->date)])++;
             }
         }
     }
@@ -152,7 +154,7 @@ void showMeAirpots ( airportADT ap )
         printf("Local: %s\n", aux-> airport ->local);
         printf("OACI: %s\n", aux-> airport ->oaci);
         printf("IATA: %s\n", aux-> airport -> iata);
-        printf("Tipo: %s\n", (aux-> airport -> type==1)?"AerÃ³dromo":((aux-> airport ->type==-1)?"Helipuerto":""));
+        printf("Tipo: %s\n", (aux-> airport -> type==1)?"Aeródromo":((aux-> airport ->type==-1)?"Helipuerto":""));
         printf("Nombre: %s\n", aux-> airport ->name);
         printf("Aterrizajes: %d\n", aux -> airport -> landings );
         printf("Despegues: %d\n", aux-> airport -> takeOffs);
@@ -235,19 +237,9 @@ internationalADT newInternationalList(void)
 	return calloc(1, sizeof(struct internationalCDT));
 };
 
-void fillInter(internationalADT inter, airportsADT airports)
-{
-    tAirport aux;
-    for(aux=airports->first; aux; aux=aux->next)
-    {
-        inter->first=addInter(inter->first, aux->iata, aux->landings, aux->takeOffs);
-        inter->totalMoves=(inter->totalMoves + aux->landings + aux->takeOffs);
-    }
-}
-
 tInterNode addInter(tInterNode first, char iata [4], unsigned int landings, unsigned int takeOffs)
 {
-    if(first==NULL || (first->takeOffs + first->landings) > (landings + takeOffs) )
+    if(first==NULL || (first->inter->takeOffs + first->inter->landings) > (landings + takeOffs) )
     {
         tInterNode resp=malloc(sizeof(*resp));
         resp->inter=malloc(sizeof(*(resp->inter)));
@@ -261,16 +253,17 @@ tInterNode addInter(tInterNode first, char iata [4], unsigned int landings, unsi
     return first;
 }
 
-unsigned int * vecDays(airportsADT airports)
+void fillInter(internationalADT inter, airportADT airports)
 {
-    unsigned int days[7];
-    tAirport aux;
+    tAirportNode aux;
     for(aux=airports->first; aux; aux=aux->next)
     {
-        days[dateToDayOfWeek(aux->airport->date)]++;
+        inter->first=addInter(inter->first, aux->airport->iata, aux->airport->landings, aux->airport->takeOffs);
+        inter->totalMoves=(inter->totalMoves + aux->airport->landings + aux->airport->takeOffs);
     }
-    return days;
 }
+
+
 
 void toBeginAirport(airportADT airport)
 {
@@ -284,10 +277,30 @@ int hasNextAirport(airportADT airport)
 
 tAirport nextAirport(airportADT airport)
 {
-    if(hasNext(airport))
+    if(hasNextAirport(airport))
     {
         airport->iterator=airport->iterator->next;
         return airport->iterator->airport;
+    }
+    return NULL;
+}
+
+void toBeginDestination(destinationADT destination)
+{
+    destination->iterator=destination->first;
+}
+
+int hasNextDestination(destinationADT destination)
+{
+    return destination->iterator != NULL;
+}
+
+tDestination nextDestination(destinationADT destination)
+{
+    if(hasNextDestination(destination))
+    {
+        destination->iterator=destination->iterator->next;
+        return destination->iterator->destination;
     }
     return NULL;
 }
