@@ -231,3 +231,13 @@ internationalADT newInternationalList(void)
 };
 
 
+unsigned int * vecDays(airportsADT airports)
+{
+    unsigned int days[7];
+    tAirport aux;
+    for(aux=airports->first; aux; aux=aux->next)
+    {
+        days[dateToDayOfWeek(aux->airport->date)]++;
+    }
+    return days;
+}
