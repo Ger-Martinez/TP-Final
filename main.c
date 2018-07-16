@@ -11,6 +11,7 @@ main (void)
 {
 	FILE * archF=fopen("eana1401-1802.csv", "r");
 	FILE * archA=fopen("aeropuertos_detalle.csv", "r");
+
 	if( archA == NULL || archF == NULL)
 	{
 		printf("Error: Alguno de los archivos se pudo abrir\n");
@@ -28,11 +29,11 @@ main (void)
 	free(trash);
 
     /* Comienzo a trabajar */
-  airportADT ap = newAirportList();
+    airportADT ap = newAirportList();
 
-
-	addAirports( ap , archA , archF );
-	showMeAirpots( ap );
+    addAirports( ap , archA );
+    addMovements( ap , archF );
+	showMeAirpots( ap  );
 
 	return 0;
 }

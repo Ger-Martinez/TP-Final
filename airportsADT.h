@@ -1,7 +1,7 @@
 #ifndef _AIRPORTSADT_H_
 #define _AIRPORTSADT_H_
 
-#include <stdlib.h>
+#include <stdio.h>
 
 
 typedef struct flightCDT * flightADT;
@@ -30,7 +30,7 @@ struct flight
 
 struct airport
 {
-  char * oaci;
+    char * oaci;
 	char local[4];
 	char * name;
 	char iata[4];
@@ -58,8 +58,9 @@ struct airline
 
 //Functions... (HACER DESCRIPCIONES)
 airportADT newAirportList(void);
-void addAirports ( airportADT ap , FILE * f );
-void addMovement( airportADT airportList , tFlight flight );
+destinationADT newDestinationsList(void);
+void addAirports ( airportADT ap , FILE * a );
+void addMovement( airportADT airportList , FILE * f );
 /*BORRAR*/
 void showMeAirpots ( airportADT ap );
 
