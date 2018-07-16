@@ -57,7 +57,7 @@ static tDestinationNode addDestination ( tDestinationNode first , char * oaci , 
 struct interNode
 {
     tInter inter;
-    tInter next;
+    struct interNode * next;
 };
 
 struct internationalCDT
@@ -239,7 +239,7 @@ internationalADT newInternationalList(void)
 
 tInterNode addInter(tInterNode first, char iata [4], unsigned int landings, unsigned int takeOffs)
 {
-    if(first==NULL || (first->inter->takeOffs + first->inter->landings) > (landings + takeOffs) )
+    if(first==NULL || (first->inter->takeOffs + first->inter->landings) < (landings + takeOffs) )
     {
         tInterNode resp=malloc(sizeof(*resp));
         resp->inter=malloc(sizeof(*(resp->inter)));
@@ -263,7 +263,17 @@ void fillInter(internationalADT inter, airportADT airports)
     }
 }
 
+void showMeInternational( internationalADT international ){
 
+    tInterNode aux;
+    for( aux = international -> first ; aux ; aux = aux -> next)
+    {
+        printf("IATA: %s\n", aux -> inter -> iata );
+        printf("Landings: %d\n", aux -> inter -> landings );
+        printf("Take Offs: %d\n", aux -> inter -> takeOffs );
+        putchar('\n');
+    }
+}
 
 void toBeginAirport(airportADT airport)
 {
