@@ -1,5 +1,6 @@
-#include "airportsADT.h"
 #include <stdio.h>
+#include "airportsADT.h"
+#include "functions.h"
 
 typedef struct airlineNode * tAirlineNode;
 typedef struct airportNode * tAirportNode;
@@ -24,21 +25,21 @@ destinationADT newDestinationsList(void)
 	return calloc(1, sizeof(struct destinationCDT));
 };
 
-tDestinationNode addDestination ( tDestinationNode first , char * oaci , int mov ){
+static tDestinationNode addDestination ( tDestinationNode first , char * oaci , int mov ){
     if( first == NULL   )
     {
-        tDestination temp = calloc( 1 , sizeof( struct destination ) );
-        temp -> oaci = malloc( sizeof ( strlen( oaci ) ) + 1 );
+        tDestination temp = calloc( 1 , sizeof( *temp ) );
+        temp -> oaci = malloc( strlen( oaci ) + 1 );
         strcpy( temp -> oaci , oaci );
         if ( mov == -1 ){
             ( temp -> takeOffs )++;
         }else if ( mov == 1 ){
             ( temp -> landings )++;
         }
-        tDestinationNode tDest = malloc( sizeof ( struct destinationsNode ) );
-        tDest -> destination = temp;
-        tDest -> next = first;
-        return tDest;
+        tDestinationNode dest = malloc( sizeof ( *dest ) );
+        dest -> destination = temp;
+        dest -> next = first;
+        return dest;
     } else if ( strcmp ( first -> destination -> oaci , oaci ) == 0 ) {
         if ( mov == -1 )
             ( first -> destination -> takeOffs )++;
@@ -98,7 +99,7 @@ static tAirportNode addAirportRec ( tAirportNode first , tAirport newAp )
 void addAirports ( airportADT ap , FILE * a )
 {
     tAirport toAdd=readAirport( a );
-    int pos = 100;
+    int pos = 100; /*BORRAR*/
     while(toAdd && pos )
     {
         if(toAdd -> oaci[0])
@@ -116,11 +117,11 @@ void addMovements( airportADT airportList , FILE * f )
 	if( airportList==NULL )
 	{
 		fprintf(stderr, "Error: Se intento agregar un movimiento a una lista no creada\n");
-		return 0;
+		return;
 	}
-	tFlight toAdd = readFlight( f );
+	tFlight toAdd;
     tAirportNode aux;
-    while ( toAdd )
+    for ( toAdd=readFlight(f); toAdd; toAdd = readFlight( f ))
     {
         for( aux = airportList -> first ; aux ; aux = aux -> next )
         {
@@ -133,10 +134,8 @@ void addMovements( airportADT airportList , FILE * f )
                 aux -> airport -> destinations -> first = addDestination( aux -> airport -> destinations -> first , toAdd -> orOaci , 1 );
             }
         }
-        toAdd = readFlight( f );
     }
-
-	return 0;
+	return;
 }
 
 /* BORRAR */

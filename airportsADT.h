@@ -59,6 +59,7 @@ struct airline
 //Functions... (HACER DESCRIPCIONES)
 airportADT newAirportList(void);
 destinationADT newDestinationsList(void);
+internationalADT newInternationalList(void);
 void addAirports ( airportADT ap , FILE * a );
 void addMovement( airportADT airportList , FILE * f );
 /*BORRAR*/
