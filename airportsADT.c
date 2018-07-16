@@ -5,6 +5,7 @@
 typedef struct airlineNode * tAirlineNode;
 typedef struct airportNode * tAirportNode;
 typedef struct destinationsNode * tDestinationNode;
+typedef struct interNode * tInterNode;
 
 // Destination Structs ...
 
@@ -53,12 +54,16 @@ static tDestinationNode addDestination ( tDestinationNode first , char * oaci , 
 
 // Airports structs ...
 
+struct interNode
+{
+    tInter inter;
+    tInter next;
+};
+
 struct internationalCDT
 {
-	tAirportNode first;
-	tAirportNode last; /* para agregar uno nuevo mas rapido */
-	tAirportNode iterator;
-	size_t totalMoves;
+	tInterNode first;
+	unsigned int totalMoves;
 };
 
 struct airportNode
@@ -112,7 +117,7 @@ void addAirports ( airportADT ap , FILE * a )
     }
 }
 
-void addMovements( airportADT airportList , FILE * f )
+void addMovements( airportADT airportList , internationalCDT interList, FILE * f )
 {
 	if( airportList==NULL )
 	{
@@ -230,6 +235,31 @@ internationalADT newInternationalList(void)
 	return calloc(1, sizeof(struct internationalCDT));
 };
 
+void fillInter(internationalADT inter, airportsADT airports)
+{
+    tAirport aux;
+    for(aux=airports->first; aux; aux=aux->next)
+    {
+        inter->first=addInter(inter->first, aux->iata, aux->landings, aux->takeOffs);
+        inter->totalMoves=(inter->totalMoves + aux->landings + aux->takeOffs);
+    }
+}
+
+tInterNode addInter(tInterNode first, char iata [4], unsigned int landings, unsigned int takeOffs)
+{
+    if(first==NULL || (first->takeOffs + first->landings) > (landings + takeOffs) )
+    {
+        tInterNode resp=malloc(sizeof(*resp));
+        resp->inter=malloc(sizeof(*(resp->inter)));
+        strcpy(resp->inter->iata, iata);
+        resp->inter->landings=landings;
+        resp->inter->takeOffs=takeOffs;
+        resp->next=first;
+        return resp;
+    }
+    first->next=addInter(first->next, iata, landings, takeOffs);
+    return first;
+}
 
 unsigned int * vecDays(airportsADT airports)
 {
@@ -240,4 +270,24 @@ unsigned int * vecDays(airportsADT airports)
         days[dateToDayOfWeek(aux->airport->date)]++;
     }
     return days;
+}
+
+void toBeginAirport(airportADT airport)
+{
+    airport->iterator=airport->first;
+}
+
+int hasNextAirport(airportADT airport)
+{
+    return airport->iterator != NULL;
+}
+
+tAirport nextAirport(airportADT airport)
+{
+    if(hasNext(airport))
+    {
+        airport->iterator=airport->iterator->next;
+        return airport->iterator->airport;
+    }
+    return NULL;
 }

@@ -14,8 +14,7 @@ typedef struct airline * tAirline;
 typedef struct airport * tAirport;
 typedef struct flight * tFlight;
 typedef struct destination * tDestination;
-
-enum days {SUN=0, MON, TUE, WED, THU, FRI, SAT};
+typedef struct inter * tInter;
 
 struct flight
 {
@@ -54,6 +53,13 @@ struct airline
 {
 	char * name;
 	unsigned int movs;
+};
+
+struct inter
+{
+	char iata[4];
+	unsigned int takeOffs;
+	unsigned int landings;
 };
 
 //Functions... (HACER DESCRIPCIONES)
