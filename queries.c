@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "airportsADT.h"
+#include "airportADT.h"
 #include "functions.h"
 #include "queries.h"
 

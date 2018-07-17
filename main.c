@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "functions.h"
-#include "airportsADT.h"
+#include "airportADT.h"
 #define SIZE_FIRST_LINE_A 184
 #define SIZE_FIRST_LINE_F 144
 #define CANT_AEROPUERTOS 5

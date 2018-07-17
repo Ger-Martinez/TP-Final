@@ -1,7 +1,7 @@
 #ifndef _FUNCTIONS_H_
 #define _FUNCTIONS_H_
 #include <stdio.h>
-#include "airportsADT.h"
+#include "airportADT.h"
 
 typedef struct flight * tFlight;
 

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "airportsADT.h"
+#include "airportADT.h"
 #include "destinationADT.h"
 #include "functions.h"
 

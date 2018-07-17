@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <ctype.h>
-#include "airportsADT.h"
+#include "airportADT.h"
 #include "functions.h"
 
 #define BLOQUE 5
