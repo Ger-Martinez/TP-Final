@@ -29,7 +29,7 @@ main(int argc, char const *argv[])
 
 	if( archA == NULL || archF == NULL)
 	{
-		fprintf(stderr, "Error: Alguno de los archivos se pudo abrir\n");
+		fprintf(stderr, "Error: Alguno de los archivos no se pudo abrir\n");
 		return 3;
 	}
 
