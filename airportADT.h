@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include "destinationADT.h"
+#include "airlineADT.h"
 
 typedef struct airportCDT * airportADT;
 typedef struct internationalCDT * internationalADT;

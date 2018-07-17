@@ -65,7 +65,7 @@ main(int argc, char const *argv[])
 	query3(query3F, airport);
 	query4(query4F, airport);
 	query5(query5F, inter  );
-query7(query7F, airport);
+	query7(query7F, airport);
 
 	fclose(query1F);
 	fclose(query2F);
