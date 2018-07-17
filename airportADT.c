@@ -150,7 +150,7 @@ tInter nextInter(internationalADT interList)
     }
     return NULL;
 }
-
+/////////dsps borrarararar
 void showMeInternational( internationalADT international )
 {
     tInterNode aux;
@@ -242,7 +242,7 @@ void freeAirport ( airportADT airport)
 	{
 		free (aux1->airport->oaci);
 		free (aux1->airport->name);
-		free (aux1->airport->destinations);
+		freeDestination (aux1->airport->destinations);
 		free (aux1);
 		aux2 = aux1;
 		aux1 = aux1->next;

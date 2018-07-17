@@ -51,8 +51,6 @@ void toBeginAirport(airportADT airport);
 int hasNextAirport(airportADT airport);
 tAirport nextAirport(airportADT airport);
 
-void showMeAirports(airportADT ap);
-
 internationalADT newInternationalList(void);
 void fillInter(internationalADT inter, airportADT airports);
 unsigned int getTotal(internationalADT interList);
