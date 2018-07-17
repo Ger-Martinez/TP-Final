@@ -207,8 +207,8 @@ void addMovements( airportADT airportList , internationalADT interList, FILE * f
                     ( aux -> airport -> landings)++;;
                 }
             }
-            free(toAdd);
         }
+				free(toAdd);
     }
 	return;
 }

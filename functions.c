@@ -46,6 +46,8 @@ tFlight readFlight(FILE * flights)
 		aux=readField(line, ';', &pos);
         strcpy(resp->date, aux);
 		free(aux);
+		if ( cmpYear(resp->date, year) != 0)
+			return resp;
 
 		//HORA
 		aux=readField(line, ';', &pos);
