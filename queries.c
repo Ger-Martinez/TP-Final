@@ -37,7 +37,7 @@ void query3(FILE * resp, airportADT airports)
 	fprintf(resp, "Martes;%u\n", v[2]);
 	fprintf(resp, "Miercoles;%u\n", v[3]);
 	fprintf(resp, "Jueves;%u\n", v[4]);
-	fprintf(resp, "Viernes:%u\n", v[5]);
+	fprintf(resp, "Viernes;%u\n", v[5]);
 	fprintf(resp, "Sabado;%u\n", v[6]);
 	fprintf(resp, "Domingo;%u\n", v[0]);
 }
