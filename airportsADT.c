@@ -2,6 +2,8 @@
 #include "airportsADT.h"
 #include "functions.h"
 
+
+
 typedef struct airlineNode * tAirlineNode;
 typedef struct airportNode * tAirportNode;
 typedef struct destinationsNode * tDestinationNode;
@@ -154,7 +156,7 @@ void showMeAirpots ( airportADT ap )
         printf("Local: %s\n", aux-> airport ->local);
         printf("OACI: %s\n", aux-> airport ->oaci);
         printf("IATA: %s\n", aux-> airport -> iata);
-        printf("Tipo: %s\n", (aux-> airport -> type==1)?"Aeródromo":((aux-> airport ->type==-1)?"Helipuerto":""));
+        printf("Tipo: %s\n", (aux-> airport -> type==1)?"AerÃ³dromo":((aux-> airport ->type==-1)?"Helipuerto":""));
         printf("Nombre: %s\n", aux-> airport ->name);
         printf("Aterrizajes: %d\n", aux -> airport -> landings );
         printf("Despegues: %d\n", aux-> airport -> takeOffs);
@@ -311,6 +313,26 @@ tDestination nextDestination(destinationADT destination)
     {
         destination->iterator=destination->iterator->next;
         return destination->iterator->destination;
+    }
+    return NULL;
+}
+
+void toBeginAirline(airlineQueryADT airline)
+{
+    airline->iterator=airline->first;
+}
+
+int hasNextAirline(airlineQueryADT airline)
+{
+    return airline->iterator != NULL;
+}
+
+tAirline nextAirline(airlineQueryADT airline)
+{
+    if(hasNextAirline(airline))
+    {
+        airline->iterator=airline->iterator->next;
+        return airline->iterator->airline;
     }
     return NULL;
 }

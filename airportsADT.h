@@ -3,8 +3,6 @@
 
 #include <stdio.h>
 
-
-typedef struct flightCDT * flightADT;
 typedef struct airportCDT * airportADT;
 typedef struct airlineQueryCDT * airlineQueryADT;
 typedef struct destinationCDT * destinationADT;
@@ -12,20 +10,8 @@ typedef struct internationalCDT * internationalADT;
 
 typedef struct airline * tAirline;
 typedef struct airport * tAirport;
-typedef struct flight * tFlight;
 typedef struct destination * tDestination;
 typedef struct inter * tInter;
-
-struct flight
-{
-    char date [ 11 ];		/* Formato DD/MM/YYYY */
-    char time [ 6 ];		/* Formato HH:MM */
-    int type;				/* ( 1 = Internacional / 0 = N/A / -1 = Cabotaje ) */
-    int mov;				/* ( 1 = Aterrizaje / 0 = N/A / -1 = Despegue ) */
-    char * orOaci;		/* No puede estar en blanco */
-    char * dstOaci;		/* No puede estar en blanco y puede contener codigos que no sean aeropuertos conocidos */
-    char * airline;
-};
 
 struct airport
 {
@@ -80,7 +66,8 @@ tAirport nextAirport(airportADT airport);
 void toBeginDestination(destinationADT destination);
 int hasNextDestination(destinationADT destination);
 tDestination nextDestination(destinationADT destination);
-
-
+void toBeginAirline(airlineQueryADT airline);
+int hasNextAirline(airlineQueryADT airline);
+tAirline nextAirline(airlineQueryADT airline);
 #endif
 
