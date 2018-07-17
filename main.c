@@ -10,7 +10,6 @@
 #define MIN_YEAR "2014"
 #define SIZE_FIRST_LINE_A 184
 #define SIZE_FIRST_LINE_F 144
-#define CANT_AEROPUERTOS 5
 
 int
 main(int argc, char const *argv[])
@@ -65,7 +64,8 @@ main(int argc, char const *argv[])
 	query3(query3F, airport);
 	query4(query4F, airport);
 	query5(query5F, inter  );
-query7(query7F, airport);
+	query7(query6F, airline);
+	query7(query7F, airline);
 
 	fclose(query1F);
 	fclose(query2F);
