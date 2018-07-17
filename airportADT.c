@@ -65,7 +65,7 @@ void addAirports ( airportADT ap , FILE * a )
         if(toAdd -> oaci[0])
         {
             ap -> first = addAirportRec ( ap -> first , toAdd );
-        }
+        } else free(toAdd);
         toAdd = readAirport( a );
     }
 }
