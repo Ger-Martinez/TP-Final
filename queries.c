@@ -55,7 +55,7 @@ void query4(FILE * resp, airportADT airports)
 		}
 	}
 }
-
+/*
 void query5(FILE * resp, airportADT airports)
 {
 	tAirport aux;
@@ -70,7 +70,7 @@ void query5(FILE * resp, airportADT airports)
 		}
 	}
 }
-
+*/
 void query6(FILE * resp, airlineQueryADT airlines)
 {
 	tAirline aux;
