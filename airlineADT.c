@@ -51,7 +51,7 @@ static tAirlineNode orderRec(tAirlineNode first, int * changed)
 {
     if(first==NULL || first->next==NULL)
         return first;
-    if(first->airline->movs < first->next->airline->movs)
+    if(first->movs < first->next->movs)
     {
         tAirlineNode aux=first->next->next;
         first->next->next=first;
@@ -73,17 +73,6 @@ void orderAirlines(airlineADT airl)
     }
 }
 
-/*BORRAR*/
-void showMeAirlines ( airlineADT a )
-{
-    tAirlineNode aux;
-    for( aux = a-> first ; aux ; aux = aux -> next)
-    {
-        printf("Airline: %s\n", aux -> airline -> name );
-        printf("Movements: %d\n", aux -> airline -> movs );
-        putchar('\n');
-    }
-}
 
 void toBeginAirline(airlineADT airline)
 {
