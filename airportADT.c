@@ -173,7 +173,7 @@ void showMeInternational( internationalADT international )
     }
 }
 
-void addMovements( airportADT airportList , internationalADT interList, FILE * f, const char * year)
+void addMovements( airportADT airportList , internationalADT interList, airlineADT airlines, FILE * f, const char * year)
 {
 	if( airportList==NULL )
 	{
@@ -185,15 +185,16 @@ void addMovements( airportADT airportList , internationalADT interList, FILE * f
 
     for ( toAdd=readFlight(f, year); toAdd; toAdd = readFlight( f, year ))
     {
+        addAirlines(airlines, toAdd->airline);
         if(cmpYear(toAdd->date, year)==0)
         {
-		  if (toAdd -> type == -1 && toAdd -> mov == 1)
-		  	(airportList -> query7[0])++;
-		  else if ( toAdd -> type == 1 && toAdd -> mov == 1)
-		  	(airportList -> query7[1])++;
-		  else if ( toAdd -> type == -1)
-		  	(airportList -> query7[2])++;
-		  else (airportList -> query7[3])++;
+            if (toAdd -> type == -1 && toAdd -> mov == 1)
+            	(airportList -> query7[0])++;
+            else if ( toAdd -> type == 1 && toAdd -> mov == 1)
+            	(airportList -> query7[1])++;
+            else if ( toAdd -> type == -1)
+            	(airportList -> query7[2])++;
+            else (airportList -> query7[3])++;
 
             for( aux = airportList -> first ; aux ; aux = aux -> next )
             {
@@ -208,7 +209,7 @@ void addMovements( airportADT airportList , internationalADT interList, FILE * f
                 }
             }
         }
-				free(toAdd);
+		free(toAdd);
     }
 	return;
 }
