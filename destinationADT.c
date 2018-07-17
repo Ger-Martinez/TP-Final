@@ -21,7 +21,7 @@ destinationADT newDestinationsList(void)
 }
 
 static tDestinationNode addDestinationRec ( tDestinationNode first , char * oaci , int mov ){
-    if( first == NULL   )
+    if( first == NULL   || strcmp(first->destination->oaci, oaci) > 0)
     {
         tDestination temp = calloc( 1 , sizeof( *temp ) );
         temp -> oaci = malloc( strlen( oaci ) + 1 );

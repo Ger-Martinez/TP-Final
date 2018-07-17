@@ -164,7 +164,7 @@ void addMovements( airportADT airportList , internationalADT interList, airlineA
 
         if(cmpYear(toAdd->date, year)==0)
         {
-					addAirlines(airlines, toAdd->airline);
+			addAirlines(airlines, toAdd->airline);
             if (toAdd -> type == -1 && toAdd -> mov == 1)
             	(airportList -> query7[0])++;
             else if ( toAdd -> type == 1 && toAdd -> mov == 1)
@@ -173,9 +173,11 @@ void addMovements( airportADT airportList , internationalADT interList, airlineA
             	(airportList -> query7[2])++;
             else (airportList -> query7[3])++;
 
+            airportList->days[dateToDayOfWeek(toAdd->date)]++;
+
             for( aux = airportList -> first ; aux ; aux = aux -> next )
             {
-								if ( strcmp( aux -> airport -> oaci , toAdd -> orOaci ) == 0 ){
+				if ( strcmp( aux -> airport -> oaci , toAdd -> orOaci ) == 0 ){
                     ( aux -> airport -> takeOffs )++;
 										aux->airport->destinations= addDestination( aux -> airport -> destinations, toAdd-> orOaci,-1);
                 }
