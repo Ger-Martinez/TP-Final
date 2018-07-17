@@ -50,6 +50,7 @@ main(int argc, char const *argv[])
 		airlineADT airline = newAirlineList();
     addAirports( airport , archA );
     addMovements( airport , inter , airline , archF , argv[1]);
+		fillInter(inter, airport);
 
 	FILE *query1F = fopen("movs_aeropuerto.csv", "w");
 	FILE *query2F = fopen("movs_internacional.csv", "w");
