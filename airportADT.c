@@ -30,6 +30,7 @@ struct interNode
 struct internationalCDT
 {
 	tInterNode first;
+	tInterNode iterator;
 	unsigned int totalMoves;
 };
 

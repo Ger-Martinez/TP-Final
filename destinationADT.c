@@ -2,9 +2,8 @@
 #include <string.h>
 #include "destinationADT.h"
 
-static tDestinationNode addDestination ( tDestinationNode first , char * oaci , int mov );
-
 typedef struct destinationsNode * tDestinationNode;
+
 
 struct destinationsNode
 {
@@ -22,6 +21,8 @@ destinationADT newDestinationsList(void)
 {
 	return calloc(1, sizeof(struct destinationCDT));
 };
+
+static tDestinationNode addDestination ( tDestinationNode first , char * oaci , int mov );
 
 static tDestinationNode addDestinationRec ( tDestinationNode first , char * oaci , int mov ){
     if( first == NULL   )
