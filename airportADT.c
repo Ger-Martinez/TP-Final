@@ -161,9 +161,10 @@ void addMovements( airportADT airportList , internationalADT interList, airlineA
 
     for ( toAdd=readFlight(f, year); toAdd; toAdd = readFlight( f, year ))
     {
-        addAirlines(airlines, toAdd->airline);
+
         if(cmpYear(toAdd->date, year)==0)
         {
+					addAirlines(airlines, toAdd->airline);
             if (toAdd -> type == -1 && toAdd -> mov == 1)
             	(airportList -> query7[0])++;
             else if ( toAdd -> type == 1 && toAdd -> mov == 1)
