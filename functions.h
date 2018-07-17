@@ -3,19 +3,6 @@
 #include <stdio.h>
 #include "airportADT.h"
 
-typedef struct flight * tFlight;
-
-struct flight
-{
-    char date [ 11 ];		/* Formato DD/MM/YYYY */
-    char time [ 6 ];		/* Formato HH:MM */
-    int type;				/* ( 1 = Internacional / 0 = N/A / -1 = Cabotaje ) */
-    int mov;				/* ( 1 = Aterrizaje / 0 = N/A / -1 = Despegue ) */
-    char * orOaci;		/* No puede estar en blanco */
-    char * dstOaci;		/* No puede estar en blanco y puede contener codigos que no sean aeropuertos conocidos */
-    char * airline;
-};
-
 /* Lee los campos de una linea del csv. Los campos vacios hacen
 **  que devuelva el string vacío. El puntero pos indica desde que
 ** posición del string line se empieza a leer. Si line es NULL

@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "airportADT.h"
 #include "functions.h"
+#include "airlineADT.h"
 #include "queries.h"
 
 void query1(FILE * resp, airportADT airports)
@@ -30,13 +31,13 @@ void query2(FILE * resp, airportADT airports)
 
 void query3(FILE * resp, airportADT airports)
 {
-	fprintf(resp, "Lunes;%u\n", airports->days[1]);
-	fprintf(resp, "Martes;%u\n", airports->days[2]);
-	fprintf(resp, "Miercoles;%u\n", airports->days[3]);
-	fprintf(resp, "Jueves;%u\n", airports->days[4]);
-	fprintf(resp, "Viernes:%u\n", airports->days[5]);
-	fprintf(resp, "Sabado;%u\n", airports->days[6]);
-	fprintf(resp, "Domingo;%u\n", airports->days[0]);
+//	fprintf(resp, "Lunes;%u\n", airports->days[1]);
+//	fprintf(resp, "Martes;%u\n", airports->days[2]);
+//	fprintf(resp, "Miercoles;%u\n", airports->days[3]);
+//	fprintf(resp, "Jueves;%u\n", airports->days[4]);
+//	fprintf(resp, "Viernes:%u\n", airports->days[5]);
+//	fprintf(resp, "Sabado;%u\n", airports->days[6]);
+//	fprintf(resp, "Domingo;%u\n", airports->days[0]);
 }
 
 void query4(FILE * resp, airportADT airports)
@@ -56,7 +57,7 @@ void query4(FILE * resp, airportADT airports)
 	}
 }
 
-void query5(FILE * resp, internationalCDT interList)
+void query5(FILE * resp, internationalADT interList)
 {
 	tInter aux;
 	toBeginInter(interList);
@@ -68,7 +69,7 @@ void query5(FILE * resp, internationalCDT interList)
 	}
 }
 
-void query6(FILE * resp, airlineQueryADT airlines)
+void query6(FILE * resp, airlineADT airlines)
 {
 	tAirline aux;
 	toBeginAirlines(airlines);

@@ -2,10 +2,6 @@
 #include <string.h>
 #include "destinationADT.h"
 
-static tDestinationNode addDestination ( tDestinationNode first , char * oaci , int mov );
-
-typedef struct destinationsNode * tDestinationNode;
-
 struct destinationsNode
 {
 	tDestination destination;

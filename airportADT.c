@@ -5,11 +5,16 @@
 #include "destinationADT.h"
 #include "functions.h"
 
-static tAirportNode addAirportRec (tAirportNode first , tAirport newAp);
-static tInterNode addInter(tInterNode first, char iata [4], unsigned int landings, unsigned int takeOffs);
+#include "functions.c"
+
 
 typedef struct airportNode * tAirportNode;
 typedef struct interNode * tInterNode;
+
+static tAirportNode addAirportRec (tAirportNode first , tAirport newAp);
+static tInterNode addInter(tInterNode first, char iata [4], unsigned int landings, unsigned int takeOffs);
+
+
 
 
 struct airportNode
@@ -34,6 +39,7 @@ struct interNode
 struct internationalCDT
 {
 	tInterNode first;
+    tInterNode iterator;
 	unsigned int totalMoves;
 };
 
@@ -92,30 +98,6 @@ tAirport nextAirport(airportADT airport)
     return NULL;
 }
 
-void showMeAirports ( airportADT ap )
-{
-    tAirportNode aux;
-    for(aux=ap->first; aux; aux=aux->next)
-    {
-        printf("Local: %s\n", aux-> airport ->local);
-        printf("OACI: %s\n", aux-> airport ->oaci);
-        printf("IATA: %s\n", aux-> airport -> iata);
-        printf("Tipo: %s\n", (aux-> airport -> type==1)?"Aeródromo":((aux-> airport ->type==-1)?"Helipuerto":""));
-        printf("Nombre: %s\n", aux-> airport ->name);
-        printf("Aterrizajes: %d\n", aux -> airport -> landings );
-        printf("Despegues: %d\n", aux-> airport -> takeOffs);
-        printf("Condicion: %s\n", (aux-> airport ->condition==1)?"Publico":((aux-> airport ->condition==-1)?"Privado":""));
-        printf("Trafico: %s\n", (aux-> airport ->isInternational==1)?"Nacional":((aux-> airport ->isInternational==-1)?"Internacional":""));
-        printf("Destinations: \n");
-        tDestinationNode dst;
-        for ( dst = aux -> airport -> destinations -> first ; dst ; dst = dst -> next ){
-            printf("    -OACI: %s\n", dst -> destination -> oaci);
-            printf("    -Aterrizajes: %d\n", dst -> destination -> landings );
-            printf("    -Despegues: %d\n", dst -> destination -> takeOffs);
-        }
-        putchar('\n');
-    }
-}
 
 internationalADT newInternationalList(void)
 {
@@ -168,7 +150,7 @@ tInter nextInter(internationalADT interList)
     if(hasNextInter(interList))
     {
         interList->iterator=interList->iterator->next;
-        return interList->iterator->interList;
+        return interList->iterator->next;
     }
     return NULL;
 }

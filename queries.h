@@ -9,9 +9,9 @@ void query3(FILE * resp, airportADT airports);
 
 void query4(FILE * resp, airportADT airports);
 
-void query5(FILE * resp, airportADT airports);
+void query5(FILE * resp, internationalADT international );
 
-void query6(FILE * resp, airlineQueryADT airlines);
+void query6(FILE * resp, airlineADT airlines);
 
 void query7(FILE * resp, airportADT airports);
 

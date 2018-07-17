@@ -7,6 +7,7 @@
 typedef struct airportCDT * airportADT;
 typedef struct internationalCDT * internationalADT;
 typedef struct airport * tAirport;
+typedef struct flight * tFlight;
 typedef struct inter * tInter;
 
 struct airport
@@ -21,6 +22,18 @@ struct airport
 	unsigned int takeOffs;
 	unsigned int landings;
 	destinationADT destinations;	/* Lista de struct destination */
+};
+
+
+struct flight
+{
+    char date [ 11 ];		/* Formato DD/MM/YYYY */
+    char time [ 6 ];		/* Formato HH:MM */
+    int type;				/* ( 1 = Internacional / 0 = N/A / -1 = Cabotaje ) */
+    int mov;				/* ( 1 = Aterrizaje / 0 = N/A / -1 = Despegue ) */
+    char * orOaci;		/* No puede estar en blanco */
+    char * dstOaci;		/* No puede estar en blanco y puede contener codigos que no sean aeropuertos conocidos */
+    char * airline;
 };
 
 struct inter
