@@ -24,7 +24,7 @@ char * readField(char * line, char delimit, int * pos)
 	return resp;
 }
 
-void skipFields(char * line, char delimit, int * pos, size_t fields)
+void skipFields(char * line, char delimit, int * pos, unsigned int fields)
 {
 	for(int i=0; i<fields && line[*pos] ;i++)
 	{

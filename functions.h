@@ -4,16 +4,16 @@
 #include "airportsADT.h"
 
 /* Lee los campos de una linea del csv. Los campos vacios hacen
-**  que devuelva el string vac�o. El puntero pos indica desde que
-** posici�n del string line se empieza a leer. Si line es NULL
+**  que devuelva el string vacío. El puntero pos indica desde que
+** posición del string line se empieza a leer. Si line es NULL
 ** retorna NULL
 */
 char * readField(char * line, char delimit, int *pos);
 
 /* Saltea "fields" cantidad de campos del csv. Si fields es 0, no hace nada.
-** Si line es NULL o fields es 0 no hace nada, se asume que pos es v�lido.
+** Si line es NULL o fields es 0 no hace nada, se asume que pos es válido.
 */
-void skipFields(char * line, char delimit, int * pos, size_t fields);
+void skipFields(char * line, char delimit, int * pos, unsigned int fields);
 
 /* Almacena una linea del csv en una estructura de vuelo, retorna NULL si no hay mas lineas que leer */
 tFlight readFlight(FILE * flights);
