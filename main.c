@@ -9,7 +9,7 @@
 #define MAX_YEAR "2018"
 #define MIN_YEAR "2014"
 #define SIZE_FIRST_LINE_A 184
-#define SIZE_FIRST_LINE_F 144
+#define SIZE_FIRST_LINE_F 145
 
 int
 main(int argc, char const *argv[])
