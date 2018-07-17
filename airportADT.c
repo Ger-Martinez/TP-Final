@@ -173,7 +173,7 @@ void showMeInternational( internationalADT international )
     }
 }
 
-void addMovements( airportADT airportList , internationalADT interList, FILE * f )
+void addMovements( airportADT airportList , internationalADT interList, FILE * f, char * year)
 {
 	if( airportList==NULL )
 	{
@@ -181,31 +181,34 @@ void addMovements( airportADT airportList , internationalADT interList, FILE * f
 		return;
 	}
 	tFlight toAdd;
-  tAirportNode aux;
+    tAirportNode aux;
 
     for ( toAdd=readFlight(f); toAdd; toAdd = readFlight( f ))
     {
-			if (toAdd -> type == -1 && toAdd -> mov == 1)
-				(airportList -> query7[0])++;
-			else if ( toAdd -> type == 1 && toAdd -> mov == 1)
-				(airportList -> query7[1])++;
-			else if ( toAdd -> type == -1)
-				(airportList -> query7[2])++;
-			else (airportList -> query7[3])++;
-
-        for( aux = airportList -> first ; aux ; aux = aux -> next )
+        if(cmpYear(toAdd->date, year)==0)
         {
-					aux -> airport -> destinations= addDestination( aux -> airport -> destinations, toAdd -> dstOaci , -1 );
-					(airportList -> days [dateToDayOfWeek(toAdd->date)])++;
+		  if (toAdd -> type == -1 && toAdd -> mov == 1)
+		  	(airportList -> query7[0])++;
+		  else if ( toAdd -> type == 1 && toAdd -> mov == 1)
+		  	(airportList -> query7[1])++;
+		  else if ( toAdd -> type == -1)
+		  	(airportList -> query7[2])++;
+		  else (airportList -> query7[3])++;
 
-            if ( strcmp( aux -> airport -> oaci , toAdd -> orOaci ) == 0 ){
-                ( aux -> airport -> takeOffs )++;
+            for( aux = airportList -> first ; aux ; aux = aux -> next )
+            {
+                aux -> airport -> destinations= addDestination( aux -> airport -> destinations, toAdd -> dstOaci , -1 );
+                (airportList -> days [dateToDayOfWeek(toAdd->date)])++;
+
+                if ( strcmp( aux -> airport -> oaci , toAdd -> orOaci ) == 0 ){
+                    ( aux -> airport -> takeOffs )++;
+                }
+                if ( strcmp( aux -> airport -> oaci , toAdd -> dstOaci ) == 0 ){
+                    ( aux -> airport -> landings)++;;
+                }
             }
-            if ( strcmp( aux -> airport -> oaci , toAdd -> dstOaci ) == 0 ){
-                ( aux -> airport -> landings)++;;
-            }
+            free(toAdd);
         }
-				free(toAdd);
     }
 	return;
 }
