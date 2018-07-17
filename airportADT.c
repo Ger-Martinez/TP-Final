@@ -202,7 +202,7 @@ void query7Vector(airportADT airport, unsigned int v[4])
 void vectorDias (airportADT airport, unsigned int v[7])
 {
 	int i;
-	for ( i = 0; i < 4; i++)
+	for ( i = 0; i < 7; i++)
 		v[i] = airport-> days[i];
 }
 
