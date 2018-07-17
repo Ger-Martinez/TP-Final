@@ -13,11 +13,16 @@ struct destination
 	unsigned int takeOffs;
 };
 
+/* Crea una nueva lista de destinos */
 destinationADT newDestinationsList(void);
+
+/* Agrega un destino a la lista */
 destinationADT addDestination(destinationADT destList, char * oaci , int mov);
 
 void toBeginDestination(destinationADT destination);
 int hasNextDestination(destinationADT destination);
 tDestination nextDestination(destinationADT destination);
+
+/* Libera los recursos ocupados por la lista de destinos */
 void freeDestination( destinationADT destinations );
 #endif
