@@ -86,7 +86,7 @@ tAirport nextAirport(airportADT airport)
 {
     if(hasNextAirport(airport))
     {
-        tAirport aux=airport->iterator->airport
+        tAirport aux=airport->iterator->airport;
         airport->iterator=airport->iterator->next;
         return aux;
     }
@@ -144,7 +144,7 @@ tInter nextInter(internationalADT interList)
 {
     if(hasNextInter(interList))
     {
-        tInter aux=interList->iterator;
+        tInter aux=interList->iterator->inter;
         interList->iterator=interList->iterator->next;
         return aux;
     }
