@@ -34,7 +34,7 @@ void skipFields(char * line, char delimit, int * pos, unsigned int fields)
 	}
 }
 
-tFlight readFlight(FILE * flights)
+tFlight readFlight(FILE * flights, const char * year)
 {
 	char line[MAX_LINE];
 	char * aux;
@@ -46,7 +46,7 @@ tFlight readFlight(FILE * flights)
 		aux=readField(line, ';', &pos);
         strcpy(resp->date, aux);
 		free(aux);
-		if ( cmpYear(resp->date, year) != 0)
+		if (cmpYear(resp->date, year) != 0)
 			return resp;
 
 		//HORA
@@ -139,12 +139,12 @@ tAirport readAirport(FILE * airports)
 
 
 
-int cmpYear(char * date1, char * year)
+int cmpYear(const char * date1, const char * year)
 {
 	return strcmp(date1+6, year); /*+6 para saltear DD/MM/ */
 }
 
-int dateToDayOfWeek(char * date)
+int dateToDayOfWeek(const char * date)
 {
 	int d, m, y;
     d = m = y = 0;

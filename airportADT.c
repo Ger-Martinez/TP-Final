@@ -173,7 +173,7 @@ void showMeInternational( internationalADT international )
     }
 }
 
-void addMovements( airportADT airportList , internationalADT interList, FILE * f, char * year)
+void addMovements( airportADT airportList , internationalADT interList, FILE * f, const char * year)
 {
 	if( airportList==NULL )
 	{
@@ -183,7 +183,7 @@ void addMovements( airportADT airportList , internationalADT interList, FILE * f
 	tFlight toAdd;
     tAirportNode aux;
 
-    for ( toAdd=readFlight(f); toAdd; toAdd = readFlight( f ))
+    for ( toAdd=readFlight(f, year); toAdd; toAdd = readFlight( f, year ))
     {
         if(cmpYear(toAdd->date, year)==0)
         {

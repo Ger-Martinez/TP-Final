@@ -16,7 +16,7 @@ char * readField(char * line, char delimit, int *pos);
 void skipFields(char * line, char delimit, int * pos, unsigned int fields);
 
 /* Almacena una linea del csv en una estructura de vuelo, retorna NULL si no hay mas lineas que leer */
-tFlight readFlight(FILE * flights);
+tFlight readFlight(FILE * flights, const char * year);
 
 /* Almacena una linea del csv en una estructura de aeropuerto, retorna NULL si no hay mas lineas que leer */
 tAirport readAirport(FILE * airports);
@@ -25,11 +25,11 @@ tAirport readAirport(FILE * airports);
 ** es mayor que el segundo, negativo si el a�o del segundo es mayor que el primero
 ** y 0 (cero) si los a�os son iguales
 */
-int cmpYear(char * date1, char * date2);
+int cmpYear(const char * date1, const char * date2);
 
 /* Convierte una fecha en formato DD/MM/YYYY en un d�a de la semana, siendo
 ** 0 el domingo y 6 el sabado
 */
-int dateToDayOfWeek(char * date);
+int dateToDayOfWeek(const char * date);
 
 #endif
