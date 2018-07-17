@@ -79,3 +79,23 @@ tAirline nextAirline(airlineADT airline)
     }
     return NULL;
 }
+
+void freeAirline( airlineADT airline ){
+
+tairlineNode aux1;
+tairlineNode aux2;
+
+for(auxNode = airline->first; airlineNode; auxNode = auxNode->next )
+{
+free(aux1->airline-> )
+
+
+
+}
+
+
+
+
+
+free(airline);
+}
