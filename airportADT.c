@@ -60,15 +60,13 @@ static tAirportNode addAirportRec ( tAirportNode first , tAirport newAp )
 void addAirports ( airportADT ap , FILE * a )
 {
     tAirport toAdd=readAirport( a );
-    int pos = 100; /*BORRAR*/
-    while(toAdd && pos )
+    while(toAdd)
     {
         if(toAdd -> oaci[0])
         {
             ap -> first = addAirportRec ( ap -> first , toAdd );
         }
         toAdd = readAirport( a );
-        pos -- ;
     }
 }
 
@@ -176,14 +174,14 @@ void addMovements( airportADT airportList , internationalADT interList, airlineA
 
             for( aux = airportList -> first ; aux ; aux = aux -> next )
             {
-                aux -> airport -> destinations= addDestination( aux -> airport -> destinations, toAdd -> dstOaci , -1 );
-                (airportList -> days [dateToDayOfWeek(toAdd->date)])++;
-
-                if ( strcmp( aux -> airport -> oaci , toAdd -> orOaci ) == 0 ){
+								if ( strcmp( aux -> airport -> oaci , toAdd -> orOaci ) == 0 ){
                     ( aux -> airport -> takeOffs )++;
+										aux->airport->destinations= addDestination( aux -> airport -> destinations, toAdd-> orOaci,-1);
                 }
                 if ( strcmp( aux -> airport -> oaci , toAdd -> dstOaci ) == 0 ){
-                    ( aux -> airport -> landings)++;;
+                    ( aux -> airport -> landings)++;
+										aux->airport->destinations= addDestination( aux -> airport -> destinations, toAdd-> orOaci,1);
+
                 }
             }
         }
