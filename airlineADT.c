@@ -45,7 +45,32 @@ static tAirlineNode addAirlineRec ( tAirlineNode a , const char * airlineName )
 void addAirlines ( airlineADT airl , const char * airline )
 {
     airl -> first = addAirlineRec ( airl -> first , airline );
+}
 
+static tAirlineNode orderRec(tAirlineNode first, int * changed)
+{
+    if(first==NULL || first->next==NULL)
+        return first;
+    if(first->movs < first->next->movs)
+    {
+        tAirlineNode aux=first->next->next;
+        first->next->next=first;
+        tAirlineNode aux2=first->next;
+        first->next=aux;
+        *changed=1;
+        return aux2;
+    }
+    first->next=orderRec(first->next, changed);
+}
+
+void orderAirlines(airlineADT airl)
+{
+    int changed=1;
+    while(changed)
+    {
+        changed=0;
+        airl->first=orderRec(airl->first, &changed);
+    }
 }
 
 /*BORRAR*/
