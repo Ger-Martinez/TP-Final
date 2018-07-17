@@ -20,7 +20,7 @@ struct airlineCDT
 airlineADT newAirlineList(void)
 {
 	return calloc(1, sizeof( struct airlineCDT ) );
-};
+}
 
 static tAirlineNode addAirlineRec ( tAirlineNode a , const char * airlineName )
 {
@@ -74,8 +74,9 @@ tAirline nextAirline(airlineADT airline)
 {
     if(hasNextAirline(airline))
     {
+        tAirline aux=airline->iterator->airline;
         airline->iterator=airline->iterator->next;
-        return airline->iterator->airline;
+        return aux;
     }
     return NULL;
 }

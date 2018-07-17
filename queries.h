@@ -1,5 +1,7 @@
 #ifndef _QUERIES_H_
 #define _QUERIES_H_
+#include "airportADT.h"
+#include "airlineADT.h"
 
 void query1(FILE * resp, airportADT airports);
 

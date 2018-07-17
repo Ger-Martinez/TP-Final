@@ -2,8 +2,6 @@
 #include <string.h>
 #include "destinationADT.h"
 
-typedef struct destinationsNode * tDestinationNode;
-
 
 struct destinationsNode
 {
@@ -20,7 +18,7 @@ struct destinationCDT
 destinationADT newDestinationsList(void)
 {
 	return calloc(1, sizeof(struct destinationCDT));
-};
+}
 
 static tDestinationNode addDestinationRec ( tDestinationNode first , char * oaci , int mov ){
     if( first == NULL   )
@@ -68,8 +66,9 @@ tDestination nextDestination(destinationADT destination)
 {
     if(hasNextDestination(destination))
     {
+        tDestination aux=destination->iterator->destination;
         destination->iterator=destination->iterator->next;
-        return destination->iterator->destination;
+        return aux;
     }
     return NULL;
 }

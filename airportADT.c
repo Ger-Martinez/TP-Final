@@ -2,17 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include "airportADT.h"
+#include "airlineADT.h"
 #include "destinationADT.h"
 #include "functions.h"
-
-
-typedef struct airportNode * tAirportNode;
-typedef struct interNode * tInterNode;
-
-static tAirportNode addAirportRec (tAirportNode first , tAirport newAp);
-static tInterNode addInter(tInterNode first, char iata [4], unsigned int landings, unsigned int takeOffs);
-
-
 
 typedef struct airportNode * tAirportNode;
 typedef struct interNode * tInterNode;
@@ -46,14 +38,10 @@ struct internationalCDT
 	unsigned int totalMoves;
 };
 
-static tAirportNode addAirportRec (tAirportNode first , tAirport newAp);
-static tInterNode addInter(tInterNode first, char iata [4], unsigned int landings, unsigned int takeOffs);
-
-
 airportADT newAirportList(void)
 {
 	return calloc(1, sizeof(struct airportCDT));
-};
+}
 
 static tAirportNode addAirportRec ( tAirportNode first , tAirport newAp )
 {
@@ -98,8 +86,9 @@ tAirport nextAirport(airportADT airport)
 {
     if(hasNextAirport(airport))
     {
+        tAirport aux=airport->iterator->airport;
         airport->iterator=airport->iterator->next;
-        return airport->iterator->airport;
+        return aux;
     }
     return NULL;
 }
@@ -108,7 +97,7 @@ tAirport nextAirport(airportADT airport)
 internationalADT newInternationalList(void)
 {
 	return calloc(1, sizeof(struct internationalCDT));
-};
+}
 
 static tInterNode addInter(tInterNode first, char iata [4], unsigned int landings, unsigned int takeOffs)
 {
@@ -155,8 +144,9 @@ tInter nextInter(internationalADT interList)
 {
     if(hasNextInter(interList))
     {
+        tInter aux=interList->iterator->inter;
         interList->iterator=interList->iterator->next;
-        return interList->iterator->inter;
+        return aux;
     }
     return NULL;
 }
