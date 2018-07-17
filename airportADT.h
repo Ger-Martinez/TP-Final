@@ -12,7 +12,7 @@ typedef struct inter * tInter;
 
 struct airport
 {
-    char * oaci;
+  char * oaci;
 	char local[4];
 	char * name;
 	char iata[4];
@@ -63,4 +63,6 @@ tInter nextInter(internationalADT interList);
 void showMeInternational( internationalADT international );
 
 void addMovements(airportADT airportList, internationalADT interList, FILE * f);
+
+unsigned int * query7Vector( airportADT airport);
 #endif

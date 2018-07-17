@@ -80,10 +80,11 @@ void query6(FILE * resp, airlineADT airlines)
 	}
 }
 
-//void query7(FILE * resp, airportADT airports)
-//{
-//	fprintf(resp, "Aterrizaje;Cabotaje;%u\n");
-//	fprintf(resp, "Aterrizaje;Internacional;%u\n" );
-//	fprintf(resp, "Despegue;Cabotaje;%u\n" );
-//	fprintf(resp, "Despegue;Internacional;%u\n" );
-//}
+void query7(FILE * resp, airportADT airport)
+{
+	unsigned int v[4] = query7Vector( airport );
+	fprintf(resp, "Aterrizaje;Cabotaje;%u\n", v[0]);
+	fprintf(resp, "Aterrizaje;Internacional;%u\n", v[1] );
+	fprintf(resp, "Despegue;Cabotaje;%u\n", v[2] );
+	fprintf(resp, "Despegue;Internacional;%u\n", v[3] );
+}

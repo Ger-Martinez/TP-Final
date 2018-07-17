@@ -29,6 +29,8 @@ struct airportCDT
 	tAirportNode first;
 	tAirportNode iterator;
 	unsigned int days [7];
+	unsigned int query7[4];
+	/*(aterrizaje,cabotaje),(aterrizaje, internacional), (despegue,cabotaje), (despegue, internacional)*/
 };
 
 struct interNode
@@ -179,23 +181,36 @@ void addMovements( airportADT airportList , internationalADT interList, FILE * f
 		return;
 	}
 	tFlight toAdd;
-    tAirportNode aux;
+  tAirportNode aux;
 
     for ( toAdd=readFlight(f); toAdd; toAdd = readFlight( f ))
     {
+			if (toAdd -> type == -1 && toAdd -> mov == 1)
+				(airportList -> query7[0])++;
+			else if ( toAdd -> type == 1 && toAdd -> mov == 1)
+				(airportList -> query7[1])++;
+			else if ( toAdd -> type == -1)
+				(airportList -> query7[2])++;
+			else (airportList -> query7[3])++;
+
         for( aux = airportList -> first ; aux ; aux = aux -> next )
         {
+					aux -> airport -> destinations= addDestination( aux -> airport -> destinations, toAdd -> dstOaci , -1 );
+					(airportList -> days [dateToDayOfWeek(toAdd->date)])++;
+
             if ( strcmp( aux -> airport -> oaci , toAdd -> orOaci ) == 0 ){
                 ( aux -> airport -> takeOffs )++;
-                aux -> airport -> destinations= addDestination( aux -> airport -> destinations, toAdd -> dstOaci , -1 );
-                (airportList -> days [dateToDayOfWeek(toAdd->date)])++;
             }
             if ( strcmp( aux -> airport -> oaci , toAdd -> dstOaci ) == 0 ){
-                ( aux -> airport -> landings)++;
-                aux -> airport -> destinations = addDestination( aux -> airport -> destinations, toAdd -> orOaci , 1 );
-                (airportList -> days [dateToDayOfWeek(toAdd->date)])++;
+                ( aux -> airport -> landings)++;;
             }
         }
+				free(toAdd);
     }
 	return;
+}
+
+unsigned int * query7Vector( airportADT airport)
+{
+	return airport->query7;
 }
