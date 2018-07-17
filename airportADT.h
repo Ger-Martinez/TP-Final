@@ -62,7 +62,7 @@ tInter nextInter(internationalADT interList);
 
 void showMeInternational( internationalADT international );
 
-void addMovements(airportADT airportList, internationalADT interList, FILE * f);
+void addMovements(airportADT airportList, internationalADT interList, FILE * f, char * year);
 
 void query7Vector(airportADT airport, unsigned int v[4]);
 void vectorDias(airportADT airport, unsigned int v[7]);
