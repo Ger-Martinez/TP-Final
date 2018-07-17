@@ -1,5 +1,8 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "airportsADT.h"
+#include "destinationADT.h"
 #include "functions.h"
 
 static tAirportNode addAirportRec (tAirportNode first , tAirport newAp);
@@ -198,12 +201,12 @@ void addMovements( airportADT airportList , internationalADT interList, FILE * f
         {
             if ( strcmp( aux -> airport -> oaci , toAdd -> orOaci ) == 0 ){
                 ( aux -> airport -> takeOffs )++;
-                aux -> airport -> destinations -> first = addDestination( aux -> airport -> destinations -> first , toAdd -> dstOaci , -1 );
+                aux -> airport -> destinations= addDestination( aux -> airport -> destinations, toAdd -> dstOaci , -1 );
                 (airportList -> days [dateToDayOfWeek(toAdd->date)])++;
             }
             if ( strcmp( aux -> airport -> oaci , toAdd -> dstOaci ) == 0 ){
                 ( aux -> airport -> landings)++;
-                aux -> airport -> destinations -> first = addDestination( aux -> airport -> destinations -> first , toAdd -> orOaci , 1 );
+                aux -> airport -> destinations = addDestination( aux -> airport -> destinations, toAdd -> orOaci , 1 );
                 (airportList -> days [dateToDayOfWeek(toAdd->date)])++;
             }
         }
