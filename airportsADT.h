@@ -15,7 +15,7 @@ typedef struct inter * tInter;
 
 struct airport
 {
-    char * oaci;
+  char * oaci;
 	char local[4];
 	char * name;
 	char iata[4];
@@ -69,5 +69,5 @@ tDestination nextDestination(destinationADT destination);
 void toBeginAirline(airlineQueryADT airline);
 int hasNextAirline(airlineQueryADT airline);
 tAirline nextAirline(airlineQueryADT airline);
+unsigned int getTotal( internationalADT interList);
 #endif
-

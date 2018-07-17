@@ -55,6 +55,7 @@ void query4(FILE * resp, airportADT airports)
 		}
 	}
 }
+<<<<<<< HEAD
 
 void query5(FILE * resp, internationalCDT interList)
 {
