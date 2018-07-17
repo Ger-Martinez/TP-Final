@@ -48,8 +48,9 @@ main(int argc, char const *argv[])
 
     airportADT airport = newAirportList();
     internationalADT inter = newInternationalList();
+		airlineADT airline = newAirlineList();
     addAirports( airport , archA );
-    addMovements( airport , inter , archF , argv[1]);
+    addMovements( airport , inter , airline , archF , argv[1]);
 
 	FILE *query1F = fopen("movs_aeropuerto.csv", "w");
 	FILE *query2F = fopen("movs_internacional.csv", "w");
@@ -64,8 +65,7 @@ main(int argc, char const *argv[])
 	query3(query3F, airport);
 	query4(query4F, airport);
 	query5(query5F, inter  );
-	query6(query6F, airport);
-	query7(query7F, airport);
+query7(query7F, airport);
 
 	fclose(query1F);
 	fclose(query2F);
