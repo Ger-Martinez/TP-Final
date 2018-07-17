@@ -20,4 +20,4 @@ queries.o:
 	gcc queries.c -c -pedantic -std=c99
 
 clean:
-	rm main main.o functions.o destinationADT.o airportADT.o airlineADT.o 
+	rm main main.o functions.o destinationADT.o airportADT.o airlineADT.o queries.o movs_aeropuerto.csv movs_internacion5.csv movs_internacional.csv movimiento.csv semanal.csv aerop_detalle.csv aerolinea.csv
