@@ -150,18 +150,6 @@ tInter nextInter(internationalADT interList)
     }
     return NULL;
 }
-/////////dsps borrarararar
-void showMeInternational( internationalADT international )
-{
-    tInterNode aux;
-    for( aux = international -> first ; aux ; aux = aux -> next)
-    {
-        printf("IATA: %s\n", aux -> inter -> iata );
-        printf("Landings: %d\n", aux -> inter -> landings );
-        printf("Take Offs: %d\n", aux -> inter -> takeOffs );
-        putchar('\n');
-    }
-}
 
 void addMovements( airportADT airportList , internationalADT interList, airlineADT airlines, FILE * f, const char * year)
 {
