@@ -68,7 +68,7 @@ void query5(FILE * resp, internationalCDT interList)
 	}
 }
 
-void query6(FILE * resp, airlineQueryADT airlines)
+void query6(FILE * resp, airlineADT airlines)
 {
 	tAirline aux;
 	toBeginAirlines(airlines);

@@ -5,12 +5,8 @@
 #include "destinationADT.h"
 #include "functions.h"
 
-static tAirportNode addAirportRec (tAirportNode first , tAirport newAp);
-static tInterNode addInter(tInterNode first, char iata [4], unsigned int landings, unsigned int takeOffs);
-
 typedef struct airportNode * tAirportNode;
 typedef struct interNode * tInterNode;
-
 
 struct airportNode
 {
@@ -36,6 +32,9 @@ struct internationalCDT
 	tInterNode first;
 	unsigned int totalMoves;
 };
+
+static tAirportNode addAirportRec (tAirportNode first , tAirport newAp);
+static tInterNode addInter(tInterNode first, char iata [4], unsigned int landings, unsigned int takeOffs);
 
 
 airportADT newAirportList(void)

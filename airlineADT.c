@@ -45,7 +45,7 @@ static tAirlineNode addAirlineRec ( tAirlineNode a , const char * airlineName )
 void addAirlines ( airlineADT airl , const char * airline )
 {
     airl -> first = addAirlineRec ( airl -> first , airline );
-    return 0;
+
 }
 
 /*BORRAR*/
