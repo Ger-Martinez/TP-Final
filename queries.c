@@ -72,7 +72,7 @@ void query5(FILE * resp, internationalADT interList)
 void query6(FILE * resp, airlineADT airlines)
 {
 	tAirline aux;
-	toBeginAirlines(airlines);
+	toBeginAirline(airlines);
 	while(hasNextAirline(airlines))
 	{
 		aux=nextAirline(airlines);

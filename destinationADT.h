@@ -14,7 +14,7 @@ struct destination
 };
 
 destinationADT newDestinationsList(void);
-static destinationADT addDestination(destinationADT destList, char * oaci , int mov);
+destinationADT addDestination(destinationADT destList, char * oaci , int mov);
 
 void toBeginDestination(destinationADT destination);
 int hasNextDestination(destinationADT destination);
