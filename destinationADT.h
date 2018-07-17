@@ -19,4 +19,5 @@ destinationADT addDestination(destinationADT destList, char * oaci , int mov);
 void toBeginDestination(destinationADT destination);
 int hasNextDestination(destinationADT destination);
 tDestination nextDestination(destinationADT destination);
+void freeDestination( destinationADT destinations );
 #endif

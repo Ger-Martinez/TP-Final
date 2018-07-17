@@ -81,22 +81,20 @@ tAirline nextAirline(airlineADT airline)
     return NULL;
 }
 
-void freeAirline( airlineADT airline ){
-
-tairlineNode aux1;
-tairlineNode aux2;
-
-for(auxNode = airline->first; airlineNode; auxNode = auxNode->next )
+void freeAirline( airlineADT airline )
 {
-free(aux1->airline-> )
 
+	tAirlineNode aux1;
+	tAirlineNode aux2;
 
+	for (aux1 = airline->first; aux1;)
+	{
+		free(aux1->airline->name);
+		free(aux1->airline);
+		aux2 = aux1;
+		aux1 = aux1->next;
+		free(aux2);
+	}
 
-}
-
-
-
-
-
-free(airline);
+	free(airline);
 }

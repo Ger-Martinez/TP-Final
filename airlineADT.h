@@ -16,4 +16,6 @@ void addAirlines ( airlineADT airl , const char * airline );
 void toBeginAirline(airlineADT airline);
 int hasNextAirline(airlineADT airline);
 tAirline nextAirline(airlineADT airline);
+
+void freeAirline( airlineADT airline );
 #endif

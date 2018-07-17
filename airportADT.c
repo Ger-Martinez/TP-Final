@@ -218,3 +218,35 @@ void vectorDias (airportADT airport, unsigned int v[7])
 	for ( i = 0; i < 4; i++)
 		v[i] = airport-> days[i];
 }
+
+void freeInter(internationalADT inter){
+
+	tInterNode aux1;
+	tInterNode aux2;
+
+	for ( aux1 = inter->first; aux1; )
+	{
+		free (aux1->inter);
+		aux2 = aux1;
+		aux1 = aux1->next;
+		free (aux2);
+	}
+	free (inter);
+}
+
+void freeAirport ( airportADT airport)
+{
+	tAirportNode aux1;
+	tAirportNode aux2;
+	for ( aux1 = airport-> first; aux1;)
+	{
+		free (aux1->airport->oaci);
+		free (aux1->airport->name);
+		free (aux1->airport->destinations);
+		free (aux1);
+		aux2 = aux1;
+		aux1 = aux1->next;
+		free (aux2);
+	}
+	free (airport);
+}

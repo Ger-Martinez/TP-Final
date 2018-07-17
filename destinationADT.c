@@ -72,3 +72,19 @@ tDestination nextDestination(destinationADT destination)
     }
     return NULL;
 }
+
+void freeDestination( destinationADT destinations ){
+
+	tDestinationNode aux1;
+	tDestinationNode aux2;
+
+	for ( aux1 = destinations->first;aux1;)
+	{
+		free(aux1->destination->oaci);
+		free(aux1->destination);
+		aux2 = aux1;
+		aux1 = aux1->next;
+		free(aux2);
+	}
+	free(destinations);
+}

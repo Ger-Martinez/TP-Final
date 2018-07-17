@@ -67,4 +67,6 @@ void addMovements(airportADT airportList, internationalADT interList, airlineADT
 
 void query7Vector(airportADT airport, unsigned int v[4]);
 void vectorDias(airportADT airport, unsigned int v[7]);
+void freeInter(internationalADT inter);
+void freeAirport ( airportADT airport);
 #endif
