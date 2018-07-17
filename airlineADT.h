@@ -12,6 +12,7 @@ struct airline
 
 airlineADT newAirlineList(void);
 void addAirlines ( airlineADT airl , const char * airline );
+void orderAirlines(airlineADT airl);
 
 void toBeginAirline(airlineADT airline);
 int hasNextAirline(airlineADT airline);
