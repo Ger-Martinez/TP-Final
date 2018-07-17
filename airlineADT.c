@@ -51,7 +51,7 @@ static tAirlineNode orderRec(tAirlineNode first, int * changed)
 {
     if(first==NULL || first->next==NULL)
         return first;
-    if(first->movs < first->next->movs)
+    if(first->airline->movs < first->next->airline->movs)
     {
         tAirlineNode aux=first->next->next;
         first->next->next=first;
