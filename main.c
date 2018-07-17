@@ -1,6 +1,9 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "functions.h"
 #include "airportADT.h"
+#include "destinationADT.h"
+#include "airlineADT.h"
 #define SIZE_FIRST_LINE_A 184
 #define SIZE_FIRST_LINE_F 144
 #define CANT_AEROPUERTOS 5
@@ -33,7 +36,7 @@ main (void)
     internationalADT inter = newInternationalList();
     addAirports( ap , archA );
     addMovements( ap , inter , archF );
-	showMeAirpots( ap  );
+
 
 	return 0;
 }
