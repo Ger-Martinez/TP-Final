@@ -229,7 +229,6 @@ void freeAirport ( airportADT airport)
 		free (aux1->airport->oaci);
 		free (aux1->airport->name);
 		freeDestination (aux1->airport->destinations);
-		free (aux1);
 		aux2 = aux1;
 		aux1 = aux1->next;
 		free (aux2);
