@@ -1,5 +1,6 @@
 #ifndef _QUERIES_H_
 #define _QUERIES_H_
+
 void query1(FILE * resp, airportADT airports);
 
 void query2(FILE * resp, airportADT airports);

@@ -1,11 +1,11 @@
 #include <stdio.h>
-#include "funciones.h"
+#include "functions.h"
 #include "airportCDT.h"
 
 #define SIZE_FIRST_LINE 300
 #define CANT_VUELOS 4
 
-int 
+int
 main (void)
 {
 	FILE * arch=fopen("eana1401-1802.csv", "r");
