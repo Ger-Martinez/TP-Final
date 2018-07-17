@@ -1,2 +1,1 @@
-# Be or not to be
-# a github MASTER
+Para hacer el ejecutable, hay que tener todos los archivos de encabezados y los archivos fuente en el directorio actiual y escribir "make" por linea de comandos. Esto automaticamente generara un archivo ejecutable que se puede llamar por ./main. Al ejecutarlo hay que pasarle un unico parametro de año entre 2014 y 2018 para que genere los archivos. Si se quiere borrar los .o y los .csv con "make clean" por linea de comando basta.
