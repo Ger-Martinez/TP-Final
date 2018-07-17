@@ -336,3 +336,11 @@ tAirline nextAirline(airlineQueryADT airline)
     }
     return NULL;
 }
+
+
+
+
+unsigned int getTotal( internationalADT interList)
+{
+	return interList->totalMoves;
+}

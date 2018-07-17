@@ -62,7 +62,7 @@ internacionales en el año pedido.
 
 Archivo: "movs_internacion5.csv"
 Formato: El código iata, la cantidad de despegues, la cantidad de aterrizajes,
-la suma de ambas, y el porcentaje (75.33) de vuelos respecto del total,
+la suma de ambas, y el porcentaje (75.33) de vuelos respecto del total.
 
 
 
