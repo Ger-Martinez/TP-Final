@@ -64,5 +64,6 @@ void showMeInternational( internationalADT international );
 
 void addMovements(airportADT airportList, internationalADT interList, FILE * f);
 
-unsigned int * query7Vector( airportADT airport);
+void query7Vector(airportADT airport, unsigned int v[4]);
+void vectorDias(airportADT airport, unsigned int v[7]);
 #endif

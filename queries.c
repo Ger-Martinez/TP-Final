@@ -31,13 +31,15 @@ void query2(FILE * resp, airportADT airports)
 
 void query3(FILE * resp, airportADT airports)
 {
-//	fprintf(resp, "Lunes;%u\n", airports->days[1]);
-//	fprintf(resp, "Martes;%u\n", airports->days[2]);
-//	fprintf(resp, "Miercoles;%u\n", airports->days[3]);
-//	fprintf(resp, "Jueves;%u\n", airports->days[4]);
-//	fprintf(resp, "Viernes:%u\n", airports->days[5]);
-//	fprintf(resp, "Sabado;%u\n", airports->days[6]);
-//	fprintf(resp, "Domingo;%u\n", airports->days[0]);
+	unsigned int v[7];
+	vectorDias( airports, v);
+	fprintf(resp, "Lunes;%u\n", v[1]);
+	fprintf(resp, "Martes;%u\n", v[2]);
+	fprintf(resp, "Miercoles;%u\n", v[3]);
+	fprintf(resp, "Jueves;%u\n", v[4]);
+	fprintf(resp, "Viernes:%u\n", v[5]);
+	fprintf(resp, "Sabado;%u\n", v[6]);
+	fprintf(resp, "Domingo;%u\n", v[0]);
 }
 
 void query4(FILE * resp, airportADT airports)
@@ -82,7 +84,8 @@ void query6(FILE * resp, airlineADT airlines)
 
 void query7(FILE * resp, airportADT airport)
 {
-	unsigned int* v = query7Vector( airport );
+	unsigned int v[4];
+	query7Vector( airport, v );
 	fprintf(resp, "Aterrizaje;Cabotaje;%u\n", v[0]);
 	fprintf(resp, "Aterrizaje;Internacional;%u\n", v[1] );
 	fprintf(resp, "Despegue;Cabotaje;%u\n", v[2] );

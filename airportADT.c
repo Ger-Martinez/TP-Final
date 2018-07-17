@@ -210,7 +210,17 @@ void addMovements( airportADT airportList , internationalADT interList, FILE * f
 	return;
 }
 
-unsigned int * query7Vector( airportADT airport)
+void query7Vector(airportADT airport, unsigned int v[4])
 {
-	return airport->query7;
+	int i;
+	for (i =0; i<4; i++ )
+	{
+		v[i] =airport->query7[i];
+	}
+}
+void vectorDias (airportADT airport, unsigned int v[7])
+{
+	int i;
+	for ( i = 0; i < 4; i++)
+		v[i] = airport-> days[i];
 }
