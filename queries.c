@@ -55,19 +55,17 @@ void query4(FILE * resp, airportADT airports)
 		}
 	}
 }
+<<<<<<< HEAD
 
-void query5(FILE * resp, airportADT airports, internationalADT interList)
+void query5(FILE * resp, internationalCDT interList)
 {
-	tAirport aux;
-	toBeginAirport(airports);
-	int total=getTotal(airports);
-	while(hasNextAirport(airports))
+	tInter aux;
+	toBeginInter(interList);
+	int total=getTotal(interList);
+	while(hasNextInter(interList))
 	{
-		aux=nextAirport(airports);
-		if(aux->isInternational && (aux->landings + aux->takeOffs))
-		{
-			fprintf(resp, "%s;%s;%u;%u;%u;%.2f\n", aux->oaci, aux->iata, aux->takeOffs, aux->landings, aux->landings + aux->takeOffs, (aux->landings + aux->takeOffs)*100/(float)getTotal(interList));
-		}
+		aux=nextInter(interList);
+		fprintf(resp, "%s;%u;%u;%u;%.2f\n", aux->iata, aux->takeOffs, aux->landings, aux->landings + aux->takeOffs, (aux->landings + aux->takeOffs)*100/(float)total);
 	}
 }
 
