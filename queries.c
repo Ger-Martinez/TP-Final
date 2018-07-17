@@ -82,7 +82,7 @@ void query6(FILE * resp, airlineADT airlines)
 
 void query7(FILE * resp, airportADT airport)
 {
-	unsigned int v[4] = query7Vector( airport );
+	unsigned int* v = query7Vector( airport );
 	fprintf(resp, "Aterrizaje;Cabotaje;%u\n", v[0]);
 	fprintf(resp, "Aterrizaje;Internacional;%u\n", v[1] );
 	fprintf(resp, "Despegue;Cabotaje;%u\n", v[2] );

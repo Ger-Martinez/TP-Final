@@ -13,6 +13,6 @@ void query5(FILE * resp, internationalADT international );
 
 void query6(FILE * resp, airlineADT airlines);
 
-void query7(FILE * resp, airportADT airports);
+void query7(FILE * resp, airportADT airport);
 
 #endif
