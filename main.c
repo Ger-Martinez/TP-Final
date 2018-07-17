@@ -35,12 +35,12 @@ main(int argc, char const *argv[])
 
 	/* Salteo la primera linea de titulos del archivo de vuelos */
 	char * trash=malloc(SIZE_FIRST_LINE_F+2);
-	fgets(trash, SIZE_FIRST_LINE_F, archF);
+	fgets(trash, SIZE_FIRST_LINE_F+2, archF);
 	free(trash);
 
 	/* Salteo la primera linea de titulos del archivo de aeropuertos */
 	trash=malloc(SIZE_FIRST_LINE_A+2);
-	fgets(trash, SIZE_FIRST_LINE_A, archA);
+	fgets(trash, SIZE_FIRST_LINE_A+2, archA);
 	free(trash);
 
     /* Comienzo a trabajar */
